@@ -1,3 +1,5 @@
+NOTE: This list will be moved to JIRA [http://www.jetbrains.net/jira/browse/STRPL] very soon (I promise :-))
+
 Features
 ========
 
