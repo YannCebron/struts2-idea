@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- basic DOM tests -->
+
+<struts>
+
+  <!-- BEAN =================================================================================================== -->
+
+  <bean class="MyClass"/>
+  <bean class="<error>INVALID_VALUE</error>"/>
+
+  <!-- TODO IDEA-bug, should trigger error -->
+  <bean class="MyInterface"/>
+
+  <bean class="MyInterfaceImpl" type="MyInterface"/>
+
+
+  <bean class="MyClass" scope="default"/>
+  <bean class="MyClass" scope="singleton"/>
+  <bean class="MyClass" scope="request"/>
+  <bean class="MyClass" scope="session"/>
+  <bean class="MyClass" scope="thread"/>
+  <bean class="MyClass" scope="<error>INVALID_VALUE</error>"/>
+
+  <bean class="MyClass" static="false"/>
+  <bean class="MyClass" static="true"/>
+  <bean class="MyClass" static="<error>INVALID_VALUE</error>"/>
+
+  <bean class="MyClass" optional="false"/>
+  <bean class="MyClass" optional="true"/>
+  <bean class="MyClass" optional="<error>INVALID_VALUE</error>"/>
+
+  <bean class="MyClass" name="myBean"/>
+  <bean class="MyClass" name=<error>""</error>/>
+  <bean class="MyClass" name="<error> </error>"/>
+
+  <!-- TODO must be unique within same "type"-elements -->
+  <bean class="MyClass" name="duplicatedName"/>
+  <bean class="MyClass" name="duplicatedName"/>
+
+
+  <!-- INCLUDE =================================================================================================== -->
+
+  <include file="include-struts.xml"/>
+  <!-- non-existing file -->
+  <include file="<error>INVALID_VALUE</error>"/>
+  <!-- valid struts.xml not in fileset -->
+  <include file="<error>notinfileset-struts.xml</error>"/>
+
+
+  <!-- PACKAGE =================================================================================================== -->
+
+  <!-- "name" -->
+  <package name="validName"/>
+  <package name=<error>""</error>/>
+  <package name="<error> </error>"/>
+  <package name="<error>duplicatedName</error>"/>
+  <package name="<error>duplicatedName</error>"/>
+
+  <!-- "namespace" -->
+  <package name="emptyName" namespace=<error>""</error>/>
+  <package name="emptyName2" namespace="<error> </error>"/>
+
+  <!-- "abstract" -->
+  <package name="validName3" abstract="true"/>
+  <package name="validName3_1" abstract="false"/>
+  <package name="validName3_2" abstract="<error>INVALID_VALUE</error>"/>
+
+  <!-- "extends" -->
+  <package name="extendingPackage" extends="extendablePackage"/>
+  <package name="extendingPackageExtendsInvalid" extends="<error>INVALID_VALUE</error>"/>
+  <package name="extendingNotInFilesetPackage" extends="<error>notInFilesetPackage</error>"/>
+
+
+  <package name="defaultActionRef">
+    <default-action-ref name="myDefaultAction"/>
+    <action name="myDefaultAction"/>
+  </package>
+
+  <package name="defaultActionRefInvalid">
+    <default-action-ref name="<error>INVALID_VALUE</error>"/>
+  </package>
+
+  <!-- ACTION =================================================================================================== -->
+
+  <!-- "name" -->
+  <package name="action1">
+    <action name="validName"/>
+    <action name=<error>""</error>/>
+    <action name="<error> </error>"/>
+    <action name="<error>duplicatedName</error>"/>
+    <action name="<error>duplicatedName</error>"/>
+  </package>
+
+  <!-- "class" -->
+  <package name="action4">
+    <action name="validName" class="MyClass"/>
+    <!-- TODO IDEA-bug, should trigger error -->
+    <action name="validName2" class="MyInterface"/>
+    <action name="validName3" class="<error>INVALID_VALUE</error>"/>
+  </package>
+
+  <!-- "method" -->
+  <package name="action6">
+    <action name="actionMethod" class="MyClass" method="validActionMethod"/>
+    <action name="actionMethodWithException" class="MyClass" method="validActionMethodWithException"/>
+    <action name="nonExistingActionMethod" class="MyClass" method="<error>INVALID_VALUE</error>"/>
+    <action name="invalidActionMethodDueToWrongExceptionType" class="MyClass"
+            method="<error>invalidActionMethodDueToWrongExceptionType</error>"/>
+    <action name="invalidActionMethodDueToWrongReturnType" class="MyClass"
+            method="<error>invalidActionMethodDueToWrongReturnType</error>"/>
+  </package>
+
+
+</struts>
