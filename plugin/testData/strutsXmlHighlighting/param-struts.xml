@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+  "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- tests for nested <param> -->
+
+<struts>
+
+  <!-- ACTION ============================================================= -->
+
+  <package name="action">
+    <action name="action7" class="MyClass">
+      <param name="param1">someValue</param>
+      <param name=<error>""</error>/>
+      <param name="<error>INVALID_VALUE</error>"/>
+    </action>
+  </package>
+
+</struts>
