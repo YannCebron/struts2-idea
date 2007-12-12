@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Struts 2 Plugin" basedir="." default="dist">
+
+  <property name="project.name" value="struts2-plugin"/>
+
+  <!-- IDEA compiler output path from project configuration -->
+  <property name="idea.buildpath.base" value="./out/production/"/>
+
+  <property name="dist.basepath" value="./dist/"/>
+  <property name="dist.lib.path" value="${dist.basepath}/${project.name}/lib"/>
+
+  <property name="module.dom-api" value="struts2-dom-api"/>
+  <property name="module.core" value="struts2-plugin"/>
+
+
+  <target name="dist" description="Build ZIP distribution of plugin">
+
+    <delete dir="${dist.basepath}"/>
+    <mkdir dir="${dist.basepath}"/>
+    <mkdir dir="${dist.basepath}/${project.name}"/>
+    <mkdir dir="${dist.lib.path}"/>
+
+    <!-- build jars -->
+    <jar basedir="${idea.buildpath.base}/${module.dom-api}"
+         destfile="${dist.lib.path}/${module.dom-api}.jar"/>
+
+    <jar basedir="${idea.buildpath.base}/${module.core}"
+         destfile="${dist.lib.path}/${module.core}.jar"/>
+
+    <!-- copy dependency libs -->
+    <copy todir="${dist.lib.path}">
+      <fileset dir="./plugin/lib"/>
+    </copy>
+
+    <!-- ZIP all jars -->
+    <zip basedir="${dist.basepath}"
+         destfile="${dist.basepath}/${project.name}.zip"/>
+
+  </target>
+
+</project>
