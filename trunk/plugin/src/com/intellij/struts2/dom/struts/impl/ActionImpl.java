@@ -15,6 +15,7 @@
 
 package com.intellij.struts2.dom.struts.impl;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PropertyUtil;
@@ -23,7 +24,6 @@ import com.intellij.struts2.dom.struts.strutspackage.DefaultClassRef;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.util.xml.DomUtil;
 import com.intellij.util.xml.GenericAttributeValue;
-import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,7 +79,7 @@ public abstract class ActionImpl implements Action {
     return null;
   }
 
-  @Nullable
+  @NotNull
   public String getNamespace() {
     return getStrutsPackage().searchNamespace();
   }
@@ -94,7 +94,8 @@ public abstract class ActionImpl implements Action {
     final Project project = actionClass.getProject();
     final PsiElementFactory psiElementFactory = PsiManager.getInstance(project).getElementFactory();
     final GlobalSearchScope projectScope = GlobalSearchScope.allScope(project);
-    final PsiClassType stringType = psiElementFactory.createTypeByFQClassName(CommonClassNames.JAVA_LANG_STRING, projectScope);
+    final PsiClassType stringType = psiElementFactory.createTypeByFQClassName(CommonClassNames.JAVA_LANG_STRING,
+        projectScope);
     final PsiClassType exceptionType = psiElementFactory.createTypeByFQClassName("java.lang.Exception", projectScope);
 
     final List<PsiMethod> actionMethods = new ArrayList<PsiMethod>();
