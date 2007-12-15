@@ -23,6 +23,8 @@ import com.intellij.psi.xml.XmlAttributeValue;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 /**
  * Provides reference functionality for static String values.
  *
@@ -63,12 +65,7 @@ public class StaticStringValuesReferenceProvider extends PsiReferenceProviderBas
           return myElement;
         }
 
-        for (final String allowedValue : values) {
-          if (myValue.equals(allowedValue)) {
-            return myElement;
-          }
-        }
-        return null;
+        return Arrays.binarySearch(values, myValue) > -1 ? myElement : null;
       }
 
       public Object[] getVariants() {
