@@ -15,20 +15,27 @@
 
 package com.intellij.struts2.dom.struts.impl;
 
+import com.intellij.openapi.paths.PathReference;
 import com.intellij.struts2.dom.struts.action.Result;
 import com.intellij.struts2.structure.LocationPresentation;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Yann CŽbron
  */
 public abstract class ResultImpl implements Result, LocationPresentation {
 
+  /**
+   * Show result location if path is resolvable.
+   *
+   * @return Result location (e.g. /somePath/myJsp.jsp).
+   */
   @Nullable
   @NonNls
   public String getLocation() {
-    return getPath();
+    final PathReference pathReference = getPath();
+    return pathReference != null ? pathReference.getPath() : null;
   }
 
 }
