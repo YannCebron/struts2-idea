@@ -18,9 +18,6 @@ package com.intellij.struts2.dom;
 import com.intellij.util.xml.*;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Exclude the current element from completion/resolving variants. The element must have a {@link NameValue} annotation.
@@ -30,27 +27,23 @@ import java.util.Map;
 public abstract class FilterCurrentElementInVariantsResolvingConverter<T extends DomElement> extends ResolvingConverter<T> {
 
   protected Collection<? extends T> filterVariants(final ConvertContext context,
-                                                   final List<? extends T> allVariants) {
-    final DomElement invocationElement = DomUtil.getDomElement(context.getTag());
+                                                   final Collection<? extends T> allVariants) {
 
     //noinspection unchecked
-    final T currentElement = (T) invocationElement;
-    assert currentElement != null : "currentElement was null for " + invocationElement;
+    final T currentElement = (T) DomUtil.getDomElement(context.getTag());
+    assert currentElement != null : "currentElement was null for " + context.getTag();
     final GenericDomValue currentNameElement = currentElement.getGenericInfo().getNameDomElement(currentElement);
-    assert currentNameElement != null : "currentNameElement was null for " + invocationElement;
+    assert currentNameElement != null : "currentNameElement was null for " + currentElement;
     final String currentName = currentNameElement.getStringValue();
-    assert currentName != null : "currentName was null for " + invocationElement;
+    assert currentName != null : "currentName was null for " + currentNameElement;
 
-    final Map<String, T> toFilter = new HashMap<String, T>(allVariants.size() - 1);
-    for (final T variant : allVariants) {
-      final GenericDomValue nameElement = variant.getGenericInfo().getNameDomElement(variant);
-      assert nameElement != null : "NameDomElement was null for " + variant;
-      final String variantName = nameElement.getStringValue();
-      if (!currentName.equals(variantName)) {
-        toFilter.put(variantName, variant);
-      }
+    final T currentElementInVariants = DomUtil.findByName(allVariants, currentName);
+    if (currentElementInVariants != null) {
+      //noinspection SuspiciousMethodCalls
+      allVariants.remove(currentElementInVariants);
     }
-    return toFilter.values();
+
+    return allVariants;
   }
 
 }
