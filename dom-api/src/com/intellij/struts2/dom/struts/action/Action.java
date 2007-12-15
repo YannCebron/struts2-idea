@@ -95,7 +95,7 @@ public interface Action extends ParamsElement {
    *
    * @return Namespace identifier.
    */
-  @Nullable
+  @NotNull
   String getNamespace();
 
   /**
