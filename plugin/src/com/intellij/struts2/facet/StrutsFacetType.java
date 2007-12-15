@@ -40,10 +40,10 @@ import java.util.Iterator;
  */
 public class StrutsFacetType extends FacetType<StrutsFacet, StrutsFacetConfiguration> {
 
-  public static final FacetType INSTANCE = new StrutsFacetType();
+  public static final FacetType<StrutsFacet, StrutsFacetConfiguration> INSTANCE = new StrutsFacetType();
 
   private StrutsFacetType() {
-    super(StrutsFacet.FACET_TYPE_ID, "Struts2", "Struts 2"/*, WebFacet.ID*/);
+    super(StrutsFacet.FACET_TYPE_ID, "Struts2", "Struts 2");
   }
 
   public StrutsFacetConfiguration createDefaultConfiguration() {
@@ -62,9 +62,10 @@ public class StrutsFacetType extends FacetType<StrutsFacet, StrutsFacetConfigura
   }
 
   public void registerDetectors(final FacetDetectorRegistry<StrutsFacetConfiguration> facetDetectorRegistry) {
-    final FacetDetectorRegistryEx<StrutsFacetConfiguration> registry = (FacetDetectorRegistryEx<StrutsFacetConfiguration>) facetDetectorRegistry;
+    final FacetDetectorRegistryEx<StrutsFacetConfiguration> registry =
+        (FacetDetectorRegistryEx<StrutsFacetConfiguration>) facetDetectorRegistry;
     registry.registerUniversalDetectorByFileNameAndRootTag(StrutsConstants.STRUTS_DEFAULT_FILENAME, StrutsRoot.TAG_NAME,
-                                                           new StrutsFacetDetector(), null);
+        new StrutsFacetDetector(), null);
   }
 
   private static class StrutsFacetDetector extends FacetDetector<VirtualFile, StrutsFacetConfiguration> {
