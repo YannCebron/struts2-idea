@@ -48,6 +48,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Converter for <code>result</code> location (tag body value).
+ *
  * @author Yann CŽbron
  */
 public class StrutsPathReferenceConverterImpl extends StrutsPathReferenceConverter {
@@ -78,7 +80,9 @@ public class StrutsPathReferenceConverterImpl extends StrutsPathReferenceConvert
       final String packageNamespace = strutsPackage.searchNamespace();
 
       final WebFacet webFacet = WebUtil.getWebFacet(psiElement);
-      assert webFacet != null : "WebFacet not found for " + psiElement.getText(); // TODO struts.xml in non-web module?
+      if (webFacet == null) {
+        return true; // setup error, web-facet must be present in current or dependent module
+      }
 
       final WebDirectoryUtil directoryUtil = WebDirectoryUtil.getWebDirectoryUtil(psiElement.getProject());
 
