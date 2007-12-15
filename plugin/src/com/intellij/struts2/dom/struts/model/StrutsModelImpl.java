@@ -40,16 +40,6 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
     super(strutsRootDomFileElement, xmlFiles);
   }
 
-/*  public String toString() {
-    String s = "StrutsModelImpl.StrutsModelImpl --------------- Rootfile: " + getMergedModel().getRoot().getFile().getName();
-    for (final XmlFile configFile : getConfigFiles()) {
-      s += ("- " + configFile + " (" + configFile.getVirtualFile().getPresentableUrl() + ")\n ");
-    }
-
-    return s;
-  }
-*/
-
   @NotNull
   public List<StrutsRoot> getMergedStrutsRoots() {
     final List<DomFileElement<StrutsRoot>> elementList = getRoots();
@@ -64,8 +54,7 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
   @NotNull
   public List<StrutsPackage> getStrutsPackages() {
     final List<StrutsPackage> packages = new ArrayList<StrutsPackage>();
-    final List<StrutsRoot> strutsRootList = getMergedStrutsRoots();
-    for (final StrutsRoot strutsRoot : strutsRootList) {
+    for (final StrutsRoot strutsRoot : getMergedStrutsRoots()) {
       packages.addAll(strutsRoot.getPackages());
     }
     return packages;
@@ -74,10 +63,9 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
   @NotNull
   public List<Action> findActionsByName(@NotNull @NonNls final String name,
                                         @Nullable @NonNls final String namespace) {
-    final List<StrutsPackage> strutsPackageList = getStrutsPackages();
-
     final List<Action> actionResultList = new ArrayList<Action>();
-    for (final StrutsPackage strutsPackage : strutsPackageList) {
+
+    for (final StrutsPackage strutsPackage : getStrutsPackages()) {
       final String packageNamespace = strutsPackage.searchNamespace();
       if (packageNamespace.equals(namespace)) {
         final List<Action> actionList = strutsPackage.getActions();
@@ -94,12 +82,10 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
   // TODO performance, use caching?!
   @NotNull
   public List<Action> findActionsByClass(@NotNull final PsiClass clazz) {
-    final List<StrutsPackage> strutsPackageList = getStrutsPackages();
-
     final List<Action> actionResultList = new ArrayList<Action>();
-    for (final StrutsPackage strutsPackage : strutsPackageList) {
-      final List<Action> actionList = strutsPackage.getActions();
-      for (final Action action : actionList) {
+
+    for (final StrutsPackage strutsPackage : getStrutsPackages()) {
+      for (final Action action : strutsPackage.getActions()) {
         final PsiClass actionClassValue = action.getActionClass().getValue();
         if (actionClassValue != null &&
             clazz.equals(actionClassValue)) {
@@ -112,10 +98,9 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
   }
 
   public List<Action> getActionsForNamespace(@Nullable @NonNls final String namespace) {
-    final List<StrutsPackage> strutsPackageList = getStrutsPackages();
 
     final List<Action> actionResultList = new ArrayList<Action>();
-    for (final StrutsPackage strutsPackage : strutsPackageList) {
+    for (final StrutsPackage strutsPackage : getStrutsPackages()) {
       if (namespace == null ||
           namespace.equals(strutsPackage.searchNamespace())) {
         actionResultList.addAll(strutsPackage.getActions());
