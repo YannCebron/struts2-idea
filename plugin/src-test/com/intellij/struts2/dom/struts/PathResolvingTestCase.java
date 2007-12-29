@@ -49,4 +49,15 @@ public class PathResolvingTestCase extends StrutsHighlightingTestCase<WebModuleF
     System.out.println("struts-path-dispatcher.xml = " + duration);
   }
 
+  /**
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionPathReferenceProvider}
+   *
+   * @throws Throwable On errors.
+   */
+  public void testActionPath() throws Throwable {
+    createStrutsFileSet("struts-actionpath.xml");
+    final long duration = myFixture.testHighlighting(true, false, true, "struts-actionpath.xml");
+    System.out.println("struts-actionpath.xml = " + duration);
+  }
+
 }
