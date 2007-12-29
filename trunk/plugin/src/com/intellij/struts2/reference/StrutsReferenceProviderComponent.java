@@ -87,8 +87,8 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
 
     // <result> "name" common values
     registerTags(new StaticStringValuesReferenceProvider("error", "input", "login", "success"),
-        "name", NAMESPACE_STRUTS_XML,
-        "result");
+                 "name", NAMESPACE_STRUTS_XML,
+                 "result");
   }
 
   private void registerUITags() {
@@ -96,95 +96,100 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
     // common attributes --------------------------------------
 
     registerTags(new ThemeReferenceProvider(),
-        "theme", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS);
+                 "theme", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS);
 
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "disabled", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS);
+                 "disabled", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS);
 //    registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER, // TODO ?!
 //                 "jsTooltipEnabled", ReferenceFilters.NAMESPACE_TAGLIB_STRUTS_UI,
 //                 TAGLIB_UI_FORM_TAGS);
     registerTags(new StaticStringValuesReferenceProvider(false, "left", "top"),
-        "labelposition", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS);
+                 "labelposition", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS);
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "required", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS);
+                 "required", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS);
     registerTags(new StaticStringValuesReferenceProvider(false, "left", "right"),
-        "requiredposition", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS); // TODO all tags included?
+                 "requiredposition", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS); // TODO all tags included?
 
     // elements with "readonly"
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "readonly", NAMESPACE_TAGLIB_STRUTS_UI,
-        "autocompleter", "combobox", "password", "textarea", "textfield");
+                 "readonly", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "autocompleter", "combobox", "password", "textarea", "textfield");
 
     // elements with "action"
     registerTags(ACTION_REFERENCE_PROVIDER,
-        "action", NAMESPACE_TAGLIB_STRUTS_UI,
-        "form", "url");
+                 "action", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "form", "url");
 
     registerTags(ACTION_REFERENCE_PROVIDER,
-        "name", NAMESPACE_TAGLIB_STRUTS_UI,
-        "action");
+                 "name", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "action");
 
     // elements with "namespace"
     registerTags(new NamespaceReferenceProvider(),
-        "namespace", NAMESPACE_TAGLIB_STRUTS_UI,
-        "action", "form", "url");
+                 "namespace", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "action", "form", "url");
 
     // elements with "cssClass"
     registerTags(new CssInHtmlClassOrIdReferenceProvider(),
-        "cssClass", NAMESPACE_TAGLIB_STRUTS_UI,
-        TAGLIB_UI_FORM_TAGS);
+                 "cssClass", NAMESPACE_TAGLIB_STRUTS_UI,
+                 TAGLIB_UI_FORM_TAGS);
 
     // specific tags ---------------------------------------------------------------------------------------------------
 
     // <action>
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "flush", NAMESPACE_TAGLIB_STRUTS_UI,
-        "action");
+                 "flush", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "action");
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "executeResult", NAMESPACE_TAGLIB_STRUTS_UI,
-        "action");
+                 "executeResult", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "action");
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "ignoreContextParams", NAMESPACE_TAGLIB_STRUTS_UI,
-        "action");
+                 "ignoreContextParams", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "action");
 
     // <form>
     registerTags(new StaticStringValuesReferenceProvider(false,
-        "application/x-www-form-urlencoded",
-        "multipart/form-data"),
-        "enctype", NAMESPACE_TAGLIB_STRUTS_UI,
-        "form");
+                                                         "application/x-www-form-urlencoded",
+                                                         "multipart/form-data"),
+                 "enctype", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "form");
     registerTags(new StaticStringValuesReferenceProvider("GET", "POST"),
-        "method", NAMESPACE_TAGLIB_STRUTS_UI,
-        "form");
+                 "method", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "form");
     // TODO portletMode
     registerTags(new StaticStringValuesReferenceProvider("_blank", "_parent", "_self", "_top"),
-        "target", NAMESPACE_TAGLIB_STRUTS_UI,
-        "form");
+                 "target", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "form");
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "validate", NAMESPACE_TAGLIB_STRUTS_UI,
-        "form");
+                 "validate", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "form");
     // TODO windowState
+
+    // <submit>
+    registerTags(new StaticStringValuesReferenceProvider(false, "input", "button", "image"),
+                 "type", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "submit");
 
     // <table>
     registerTags(new StaticStringValuesReferenceProvider(false, "ASC", "DESC", "NONE"),
-        "sortOrder", NAMESPACE_TAGLIB_STRUTS_UI,
-        "table");
+                 "sortOrder", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "table");
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "sortable", NAMESPACE_TAGLIB_STRUTS_UI,
-        "table");
+                 "sortable", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "table");
 
     // <url>
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "encode", NAMESPACE_TAGLIB_STRUTS_UI,
-        "url");
+                 "encode", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "url");
     registerTags(BOOLEAN_VALUE_REFERENCE_PROVIDER,
-        "escapeAmp", NAMESPACE_TAGLIB_STRUTS_UI,
-        "url");
+                 "escapeAmp", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "url");
   }
 
   /**
@@ -200,7 +205,7 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
                             final NamespaceFilter namespaceFilter,
                             final @NonNls String... tagNames) {
     registry.registerXmlAttributeValueReferenceProvider(new String[]{attributeName},
-        ReferenceFilters.andTagNames(namespaceFilter, tagNames),
-        provider);
+                                                        ReferenceFilters.andTagNames(namespaceFilter, tagNames),
+                                                        provider);
   }
 }
