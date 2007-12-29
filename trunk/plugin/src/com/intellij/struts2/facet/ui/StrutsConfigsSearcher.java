@@ -26,7 +26,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentIterator;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -41,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +53,8 @@ public class StrutsConfigsSearcher {
   private static final String XML_EXTENSION = StdFileTypes.XML.getDefaultExtension();
 
   private final FacetEditorContext myContext;
-  private final Map<Module, List<PsiFile>> myFiles = new HashMap<Module, List<PsiFile>>();
-  private final Map<Module, Map<PsiFile, List<PsiFile>>> myJars = new HashMap<Module, Map<PsiFile, List<PsiFile>>>();
+  private final Map<Module, List<PsiFile>> myFiles = new LinkedHashMap<Module, List<PsiFile>>();
+  private final Map<VirtualFile, List<PsiFile>> myJars = new LinkedHashMap<VirtualFile, List<PsiFile>>();
 
   private final List<VirtualFile> myVirtualFiles = new ArrayList<VirtualFile>();
 
@@ -143,7 +142,6 @@ public class StrutsConfigsSearcher {
     final PsiManager psiManager = PsiManager.getInstance(project);
     final StrutsManager strutsManager = StrutsManager.getInstance(project);
     final ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-    final Map<PsiFile, List<PsiFile>> map = new HashMap<PsiFile, List<PsiFile>>();
     for (final VirtualFile virtualFile : rootManager.getFiles(OrderRootType.CLASSES)) {
       if (isJarFile(virtualFile)) {
         if (virtualFile.isDirectory()) {
@@ -166,17 +164,10 @@ public class StrutsConfigsSearcher {
           };
           iterator.processFile(virtualFile);
           if (list.size() > 0) {
-            final VirtualFile jar = JarFileSystem.getInstance().getVirtualFileForJar(virtualFile);
-            if (jar != null) {
-              final PsiFile psiFile = psiManager.findFile(jar);
-              map.put(psiFile, list);
-            }
+            myJars.put(virtualFile, list);
           }
         }
       }
-    }
-    if (map.size() > 0) {
-      myJars.put(module, map);
     }
   }
 
@@ -188,7 +179,7 @@ public class StrutsConfigsSearcher {
     return myFiles;
   }
 
-  public Map<Module, Map<PsiFile, List<PsiFile>>> getJars() {
+  public Map<VirtualFile, List<PsiFile>> getJars() {
     return myJars;
   }
 

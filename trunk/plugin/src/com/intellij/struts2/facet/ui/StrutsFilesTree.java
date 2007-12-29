@@ -102,13 +102,18 @@ public class StrutsFilesTree extends CheckboxTreeBase {
   }
 
   public Set<PsiFile> buildModuleNodes(final Map<Module, List<PsiFile>> files,
-                                       final Map<Module, Map<PsiFile, List<PsiFile>>> jars,
+                                       final Map<VirtualFile, List<PsiFile>> jars,
                                        final StrutsFileSet fileSet) {
 
     final CheckedTreeNode root = (CheckedTreeNode) getModel().getRoot();
-    final Set<PsiFile> psiFiles = new HashSet<PsiFile>();
-    final Set<Module> modules = new LinkedHashSet<Module>(files.keySet());
-    modules.addAll(jars.keySet());
+    final HashSet<PsiFile> psiFiles = new HashSet<PsiFile>();
+    final List<Module> modules = new ArrayList<Module>(files.keySet());
+    Collections.sort(modules, new Comparator<Module>() {
+      public int compare(final Module o1, final Module o2) {
+        return o1.getName().compareTo(o2.getName());
+      }
+    });
+
     for (final Module module : modules) {
       final CheckedTreeNode moduleNode = new CheckedTreeNode(module);
       moduleNode.setChecked(false);
@@ -122,18 +127,22 @@ public class StrutsFilesTree extends CheckboxTreeBase {
           psiFiles.add(file);
         }
       }
-      final Map<PsiFile, List<PsiFile>> map = jars.get(module);
-      if (map != null) {
-        for (final PsiFile jar : map.keySet()) {
+    }
+
+    for (final VirtualFile file : jars.keySet()) {
+      final List<PsiFile> list = jars.get(file);
+      final VirtualFile jarFile = JarFileSystem.getInstance().getVirtualFileForJar(file);
+      if (jarFile != null) {
+        final PsiFile jar = list.get(0).getManager().findFile(jarFile);
+        if (jar != null) {
           final CheckedTreeNode jarNode = new CheckedTreeNode(jar);
           jarNode.setChecked(false);
-          moduleNode.add(jarNode);
-          final List<PsiFile> list = map.get(jar);
-          Collections.sort(moduleFiles, FILE_COMPARATOR);
-          for (final PsiFile file : list) {
-            final CheckedTreeNode vfNode = createFileNode(file, fileSet);
+          root.add(jarNode);
+          Collections.sort(list, FILE_COMPARATOR);
+          for (final PsiFile psiFile : list) {
+            final CheckedTreeNode vfNode = createFileNode(psiFile, fileSet);
             jarNode.add(vfNode);
-            psiFiles.add(file);
+            psiFiles.add(psiFile);
           }
         }
       }

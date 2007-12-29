@@ -77,7 +77,7 @@ public class FileSetEditor extends DialogWrapper {
     myFilesTree.setModel(new DefaultTreeModel(myRoot));
     searcher.search();
     final Map<Module, List<PsiFile>> files = searcher.getFilesByModules();
-    final Map<Module, Map<PsiFile, List<PsiFile>>> jars = searcher.getJars();
+    final Map<VirtualFile, List<PsiFile>> jars = searcher.getJars();
     final Set<PsiFile> psiFiles = myFilesTree.buildModuleNodes(files, jars, fileSet);
     final List<VirtualFile> virtualFiles = searcher.getVirtualFiles();
     for (final VirtualFile virtualFile : virtualFiles) {
