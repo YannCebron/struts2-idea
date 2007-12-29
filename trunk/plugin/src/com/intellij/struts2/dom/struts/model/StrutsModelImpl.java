@@ -67,7 +67,7 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
 
     for (final StrutsPackage strutsPackage : getStrutsPackages()) {
       final String packageNamespace = strutsPackage.searchNamespace();
-      if (packageNamespace.equals(namespace)) {
+      if (namespace == null || packageNamespace.equals(namespace)) {
         final List<Action> actionList = strutsPackage.getActions();
         for (final Action action : actionList) {
           if (name.equals(action.getName().getStringValue())) {
