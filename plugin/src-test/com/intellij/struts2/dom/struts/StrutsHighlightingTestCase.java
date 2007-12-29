@@ -34,7 +34,10 @@ import com.intellij.testFramework.fixtures.*;
 import java.util.Set;
 
 /**
+ * Base class for highlighting tests.
+ *
  * @author Yann CŽbron
+ * @param <T> ModuleFixtureBuilder class to use.
  */
 public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuilder> extends BasicStrutsTestCase {
 
@@ -78,7 +81,7 @@ public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuil
     final RunResult<StrutsFacet> runResult = new WriteCommandAction<StrutsFacet>(myProject) {
       protected void run(final Result<StrutsFacet> result) throws Throwable {
         final ModifiableFacetModel model = FacetManager.getInstance(myModule).createModifiableModel();
-        final StrutsFacet facet = (StrutsFacet) StrutsFacetType.INSTANCE
+        final StrutsFacet facet = StrutsFacetType.INSTANCE
             .createFacet(myModule, StrutsFacetType.INSTANCE.getPresentableName(),
                          StrutsFacetType.INSTANCE.createDefaultConfiguration(), null);
         result.setResult(facet);
@@ -88,7 +91,7 @@ public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuil
     }.execute();
     final Throwable throwable = runResult.getThrowable();
     if (throwable != null) {
-      throw new RuntimeException(throwable);
+      throw new RuntimeException("error setting up StrutsFacet", throwable);
     }
 
     return runResult.getResultObject();
