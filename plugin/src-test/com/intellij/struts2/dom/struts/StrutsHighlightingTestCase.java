@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * @author Yann CŽbron
  */
-public abstract class StrutsHighlightingTestCase extends BasicStrutsTestCase {
+public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuilder> extends BasicStrutsTestCase {
 
   protected CodeInsightTestFixture myFixture;
   protected ModuleFixture myModuleTestFixture;
@@ -44,13 +44,16 @@ public abstract class StrutsHighlightingTestCase extends BasicStrutsTestCase {
   protected Module myModule;
   protected StrutsFacet myFacet;
 
+  protected Class<T> getModuleFixtureBuilderClass() {
+    return (Class<T>) JavaModuleFixtureBuilder.class;
+  }
 
   protected void setUp() throws Exception {
     super.setUp();
 
     final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder = IdeaTestFixtureFactory.getFixtureFactory()
         .createFixtureBuilder();
-    final JavaModuleFixtureBuilder moduleBuilder = projectBuilder.addModule(JavaModuleFixtureBuilder.class);
+    final T moduleBuilder = projectBuilder.addModule(getModuleFixtureBuilderClass());
     myFixture = IdeaTestFixtureFactory.getFixtureFactory().createCodeInsightFixture(projectBuilder.getFixture());
 
     myFixture.setTestDataPath(getTestDataPath());
@@ -66,7 +69,7 @@ public abstract class StrutsHighlightingTestCase extends BasicStrutsTestCase {
     myFacet = createFacet();
   }
 
-  protected void configureModule(final JavaModuleFixtureBuilder moduleBuilder) throws Exception {
+  protected void configureModule(final T moduleBuilder) throws Exception {
     moduleBuilder.addContentRoot(myFixture.getTempDirPath());
     moduleBuilder.addSourceRoot("");
   }
@@ -77,7 +80,7 @@ public abstract class StrutsHighlightingTestCase extends BasicStrutsTestCase {
         final ModifiableFacetModel model = FacetManager.getInstance(myModule).createModifiableModel();
         final StrutsFacet facet = (StrutsFacet) StrutsFacetType.INSTANCE
             .createFacet(myModule, StrutsFacetType.INSTANCE.getPresentableName(),
-                StrutsFacetType.INSTANCE.createDefaultConfiguration(), null);
+                         StrutsFacetType.INSTANCE.createDefaultConfiguration(), null);
         result.setResult(facet);
         model.addFacet(facet);
         model.commit();
