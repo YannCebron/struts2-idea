@@ -353,20 +353,24 @@ public class StrutsApplicationComponent implements ApplicationComponent, Inspect
    */
   private static void initExternalResources() {
     addDTDResource(StrutsConstants.STRUTS_2_0_DTD_URI,
-        StrutsConstants.STRUTS_2_0_DTD_ID,
-        "/resources/dtds/struts-2.0.dtd");
+                   StrutsConstants.STRUTS_2_0_DTD_ID,
+                   "/resources/dtds/struts-2.0.dtd");
+
+    addDTDResource(StrutsConstants.XWORK_DTD_URI,
+                   StrutsConstants.XWORK_DTD_ID,
+                   "/resources/dtds/xwork-2.0.dtd");
 
     addDTDResource(StrutsConstants.VALIDATOR_1_00_DTD_URI,
-        StrutsConstants.VALIDATOR_1_00_DTD_ID,
-        "/resources/dtds/xwork-validator-1.0.dtd");
+                   StrutsConstants.VALIDATOR_1_00_DTD_ID,
+                   "/resources/dtds/xwork-validator-1.0.dtd");
 
     addDTDResource(StrutsConstants.VALIDATOR_1_02_DTD_URI,
-        StrutsConstants.VALIDATOR_1_02_DTD_ID,
-        "/resources/dtds/xwork-validator-1.0.2.dtd");
+                   StrutsConstants.VALIDATOR_1_02_DTD_ID,
+                   "/resources/dtds/xwork-validator-1.0.2.dtd");
 
     addDTDResource(StrutsConstants.VALIDATOR_CONFIG_DTD_URI,
-        StrutsConstants.VALIDATOR_CONFIG_DTD_ID,
-        "/resources/dtds/xwork-validator-config-1.0.dtd");
+                   StrutsConstants.VALIDATOR_CONFIG_DTD_ID,
+                   "/resources/dtds/xwork-validator-config-1.0.dtd");
   }
 
   /**
