@@ -43,9 +43,9 @@ import java.util.List;
 public class StrutsDomFileDescription extends DomFileDescription<StrutsRoot> {
 
   private static final List<String> STRUTS_NAMESPACES = Arrays.asList(StrutsConstants.STRUTS_2_0_DTD_URI,
-                                                                      StrutsConstants.STRUTS_2_0_DTD_ID/*,
+                                                                      StrutsConstants.STRUTS_2_0_DTD_ID,
                                                                       StrutsConstants.XWORK_DTD_URI,
-                                                                      StrutsConstants.XWORK_DTD_ID*/);
+                                                                      StrutsConstants.XWORK_DTD_ID);
 
   public StrutsDomFileDescription() {
     super(StrutsRoot.class, StrutsRoot.TAG_NAME);
@@ -66,8 +66,8 @@ public class StrutsDomFileDescription extends DomFileDescription<StrutsRoot> {
     registerImplementation(StrutsPackage.class, StrutsPackageImpl.class);
   }
 
-/* public boolean acceptsOtherRootTagNames() {
+ public boolean acceptsOtherRootTagNames() {
     return true;
-  }*/
+  }
 
 }
