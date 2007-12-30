@@ -10,12 +10,19 @@
 
   <!-- ACTION ============================================================= -->
 
-  <package name="action">
-    <action name="action7" class="MyClass">
+  <package name="testParams">
+
+    <action name="testParams" class="MyClass">
       <param name="param1">someValue</param>
       <param name=<error>""</error>/>
       <param name="<error>INVALID_VALUE</error>"/>
     </action>
+
+    <action name="testDuplicateParams" class="MyClass">
+      <param name="<error>param1</error>">someValue</param>
+      <param name="<error>param1</error>">someValue2</param>
+    </action>
+
   </package>
 
 </struts>
