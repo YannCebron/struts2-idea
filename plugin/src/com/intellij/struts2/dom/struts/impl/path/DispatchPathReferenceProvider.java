@@ -96,7 +96,7 @@ class DispatchPathReferenceProvider implements PathReferenceProvider {
             }
 
             // 2. add parent <package> "namespace" as result prefix directory path if not ROOT
-            if (!packageNamespace.equals("/")) {
+            if (!packageNamespace.equals(StrutsPackage.DEFAULT_NAMESPACE)) {
               final WebDirectoryElement packageBase = directoryUtil.findWebDirectoryElementByPath(
                   packageNamespace,
                   webFacet);
