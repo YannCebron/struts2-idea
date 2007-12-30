@@ -18,8 +18,8 @@ package com.intellij.struts2.dom.struts.strutspackage;
 import com.intellij.struts2.dom.StrutsDomConstants;
 import com.intellij.struts2.dom.struts.action.Action;
 import com.intellij.util.xml.*;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -30,6 +30,8 @@ import java.util.List;
  */
 @Namespace(StrutsDomConstants.STRUTS_NAMESPACE_KEY)
 public interface StrutsPackage extends DomElement {
+
+  String DEFAULT_NAMESPACE = "/";
 
   @NameValue
   @Required

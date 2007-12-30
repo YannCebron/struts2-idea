@@ -123,7 +123,7 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
             // prepend package-name if not default ("/") or "current" package
             final String actionNamespace = action.getNamespace();
             final String fullPath;
-            if (!actionNamespace.equals("/") && !isInCurrentPackage) {
+            if (!actionNamespace.equals(StrutsPackage.DEFAULT_NAMESPACE) && !isInCurrentPackage) {
               fullPath = actionNamespace + "/" + actionPath + actionExtension;
             } else {
               fullPath = actionPath + actionExtension;

@@ -15,9 +15,9 @@
 
 package com.intellij.struts2.dom.struts.impl;
 
-import com.intellij.struts2.structure.LocationPresentation;
 import com.intellij.struts2.dom.struts.strutspackage.DefaultClassRef;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
+import com.intellij.struts2.structure.LocationPresentation;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -32,7 +32,7 @@ public abstract class StrutsPackageImpl implements StrutsPackage, LocationPresen
   @NotNull
   public String searchNamespace() {
     final String namespace = getNamespace().getStringValue();
-    return namespace != null ? namespace : "/";
+    return namespace != null ? namespace : DEFAULT_NAMESPACE;
   }
 
   public DefaultClassRef searchDefaultClassRef() {
