@@ -48,16 +48,19 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
     for (final DomFileElement<StrutsRoot> strutsRootDomFileElement : elementList) {
       allRoots.add(strutsRootDomFileElement.getRootElement());
     }
+
     return allRoots;
   }
 
   @NotNull
   public List<StrutsPackage> getStrutsPackages() {
-    final List<StrutsPackage> packages = new ArrayList<StrutsPackage>();
+    final List<StrutsPackage> strutsPackageList = new ArrayList<StrutsPackage>();
+
     for (final StrutsRoot strutsRoot : getMergedStrutsRoots()) {
-      packages.addAll(strutsRoot.getPackages());
+      strutsPackageList.addAll(strutsRoot.getPackages());
     }
-    return packages;
+
+    return strutsPackageList;
   }
 
   @NotNull
@@ -65,17 +68,12 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
                                         @Nullable @NonNls final String namespace) {
     final List<Action> actionResultList = new ArrayList<Action>();
 
-    for (final StrutsPackage strutsPackage : getStrutsPackages()) {
-      final String packageNamespace = strutsPackage.searchNamespace();
-      if (namespace == null || packageNamespace.equals(namespace)) {
-        final List<Action> actionList = strutsPackage.getActions();
-        for (final Action action : actionList) {
-          if (name.equals(action.getName().getStringValue())) {
-            actionResultList.add(action);
-          }
-        }
+    for (final Action action : getActionsForNamespace(namespace)) {
+      if (name.equals(action.getName().getStringValue())) {
+        actionResultList.add(action);
       }
     }
+    
     return actionResultList;
   }
 
@@ -98,8 +96,8 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
   }
 
   public List<Action> getActionsForNamespace(@Nullable @NonNls final String namespace) {
-
     final List<Action> actionResultList = new ArrayList<Action>();
+
     for (final StrutsPackage strutsPackage : getStrutsPackages()) {
       if (namespace == null ||
           namespace.equals(strutsPackage.searchNamespace())) {
