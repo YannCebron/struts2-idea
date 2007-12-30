@@ -85,6 +85,7 @@
     <default-action-ref name="<error>INVALID_VALUE</error>"/>
   </package>
 
+
   <!-- ACTION =================================================================================================== -->
 
   <!-- "name" -->
@@ -115,5 +116,20 @@
             method="<error>invalidActionMethodDueToWrongReturnType</error>"/>
   </package>
 
+
+  <!-- RESULT, locations are tested in "path" =================================================================== -->
+
+  <package name="testResult">
+
+    <action name="testResultAction">
+      <!-- default name = success, cannot have two -->
+      <<error>result</error>>testResultAction.action</result>
+      <<error>result</error>>testResultAction.action</result>
+
+      <result name="<error>duplicateName</error>">testResultAction.action</result>
+      <result name="<error>duplicateName</error>">testResultAction.action</result>
+    </action>
+
+  </package>
 
 </struts>
