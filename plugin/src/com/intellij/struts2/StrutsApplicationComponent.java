@@ -253,7 +253,7 @@ public class StrutsApplicationComponent implements ApplicationComponent, Inspect
       }
     });
 
-    ElementPresentationManager.registerIcon(DefaultInterceptorRef.class, StrutsIcons.DEFAULT_INTERCEPTOR);
+    ElementPresentationManager.registerIcon(DefaultInterceptorRef.class, StrutsIcons.DEFAULT_INTERCEPTOR_REF);
     ElementPresentationManager.registerNameProvider(new NullableFunction<Object, String>() {
       public String fun(final Object o) {
         return o instanceof DefaultInterceptorRef ? ((DefaultInterceptorRef) o).getName().getStringValue() : null;
@@ -288,6 +288,28 @@ public class StrutsApplicationComponent implements ApplicationComponent, Inspect
         if (o instanceof GlobalResult) {
           final String globalResultName = ((GlobalResult) o).getName().getStringValue();
           return globalResultName != null ? globalResultName : "success";
+        }
+        return null;
+      }
+    });
+
+    // <default-action-ref>
+    ElementPresentationManager.registerIcon(DefaultActionRef.class, StrutsIcons.DEFAULT_ACTION_REF);
+    ElementPresentationManager.registerNameProvider(new NullableFunction<Object, String>() {
+      public String fun(final Object o) {
+        if (o instanceof DefaultActionRef) {
+          return ((DefaultActionRef) o).getName().getStringValue();
+        }
+        return null;
+      }
+    });
+
+    // <default-class-ref>
+    ElementPresentationManager.registerIcon(DefaultClassRef.class, StrutsIcons.DEFAULT_CLASS_REF);
+    ElementPresentationManager.registerNameProvider(new NullableFunction<Object, String>() {
+      public String fun(final Object o) {
+        if (o instanceof DefaultClassRef) {
+          return ((DefaultClassRef) o).getDefaultClass().getStringValue();
         }
         return null;
       }
