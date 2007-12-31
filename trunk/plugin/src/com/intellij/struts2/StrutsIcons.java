@@ -62,13 +62,20 @@ public final class StrutsIcons {
   public static final int SMALL_ICON_Y_OFFSET = 6;
 
   /**
-   * Overlay icon for "global" elements. TODO use small world-globe
+   * Overlay icon for "global" elements.
    */
-  private static final Icon OVERLAY_GLOBAL = IconLoader.getIcon("/nodes/staticMark.png");
+  private static final Icon OVERLAY_GLOBAL = IconLoader.getIcon("/general/web.png");
+  private static final int OVERLAY_GLOBAL_Y_OFFSET = 8;
+  private static final int OVERLAY_GLOBAL_X_OFFSET = 8;
 
-  private static final int OVERLAY_GLOBAL_Y_OFFSET = 0;
+  /**
+   * Overlay icon for "default" elements.
+   */
+  private static final Icon OVERLAY_DEFAULT = IconLoader.getIcon("/gutter/check.png");
+  private static final int OVERLAY_DEFAULT_Y_OFFSET = 6;
+  private static final int OVERLAY_DEFAULT_X_OFFSET = 8;
 
-  // DOM ------------------------------------------------
+  // struts.xml
   public static final Icon ACTION = getIcon("action.png");
   public static final Icon ACTION_SMALL = getIcon("action_small.png");
   public static final Icon BEAN = getIcon("coffeebean.png");
@@ -76,18 +83,21 @@ public final class StrutsIcons {
   public static final Icon INCLUDE = getIcon("import1.png");
   public static final Icon INTERCEPTOR = getIcon("funnel.png");
   public static final Icon INTERCEPTOR_STACK = getIcon("funnel_up.png");
-  public static final Icon DEFAULT_INTERCEPTOR = getIcon("funnel_preferences.png");
   public static final Icon PACKAGE = getIcon("folder_gear.png");
   public static final Icon PARAM = getIcon("preferences.png");
   public static final Icon RESULT = getIcon("arrow_right_blue.png");
-
   public static final Icon RESULT_TYPE = getIcon("presentation.png");
-  public static final LayeredIcon GLOBAL_RESULT = new LayeredIcon(2);
 
+  public static final LayeredIcon GLOBAL_RESULT = new LayeredIcon(2);
   public static final LayeredIcon GLOBAL_EXCEPTION_MAPPING = new LayeredIcon(2);
+
+  public static final LayeredIcon DEFAULT_ACTION_REF = new LayeredIcon(2);
+  public static final LayeredIcon DEFAULT_CLASS_REF = new LayeredIcon(2);
+  public static final LayeredIcon DEFAULT_INTERCEPTOR_REF = new LayeredIcon(2);
+
+  // validation.xml
   public static final Icon VALIDATOR = getIcon("validation.png");
   public static final Icon VALIDATOR_SMALL = getIcon("validation_small.png");
-
 
   public static final Icon MESSAGE = getIcon("message.png");
 
@@ -102,10 +112,19 @@ public final class StrutsIcons {
     VALIDATION_CONFIG_FILE_ICON.setIcon(VALIDATOR_SMALL, 1, 0, SMALL_ICON_Y_OFFSET);
 
     GLOBAL_RESULT.setIcon(RESULT, 0);
-    GLOBAL_RESULT.setIcon(OVERLAY_GLOBAL, 1, 0, OVERLAY_GLOBAL_Y_OFFSET);
+    GLOBAL_RESULT.setIcon(OVERLAY_GLOBAL, 1, OVERLAY_GLOBAL_X_OFFSET, OVERLAY_GLOBAL_Y_OFFSET);
 
     GLOBAL_EXCEPTION_MAPPING.setIcon(EXCEPTION_MAPPING, 0);
-    GLOBAL_EXCEPTION_MAPPING.setIcon(OVERLAY_GLOBAL, 1, 0, OVERLAY_GLOBAL_Y_OFFSET);
+    GLOBAL_EXCEPTION_MAPPING.setIcon(OVERLAY_GLOBAL, 1, OVERLAY_GLOBAL_X_OFFSET, OVERLAY_GLOBAL_Y_OFFSET);
+
+    DEFAULT_ACTION_REF.setIcon(ACTION, 0);
+    DEFAULT_ACTION_REF.setIcon(OVERLAY_DEFAULT, 1, OVERLAY_DEFAULT_X_OFFSET, OVERLAY_DEFAULT_Y_OFFSET);
+
+    DEFAULT_CLASS_REF.setIcon(Icons.CLASS_ICON, 0);
+    DEFAULT_CLASS_REF.setIcon(OVERLAY_DEFAULT, 1, OVERLAY_DEFAULT_X_OFFSET, OVERLAY_DEFAULT_Y_OFFSET);
+
+    DEFAULT_INTERCEPTOR_REF.setIcon(INTERCEPTOR, 0);
+    DEFAULT_INTERCEPTOR_REF.setIcon(OVERLAY_DEFAULT, 1, OVERLAY_DEFAULT_X_OFFSET, OVERLAY_DEFAULT_Y_OFFSET);
   }
 
 }
