@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+
+  <package name="actionChainTest" namespace="/actionChainTest">
+    <result-types>
+      <result-type name="chain" class="com.opensymphony.xwork2.ActionChainResult"/>
+    </result-types>
+
+    <action name="actionPath1">
+      <result name="packageLocalActionName" type="chain">actionPath2</result>
+      <result name="includingPackagePrefix" type="chain">/actionChainTest/actionPath2</result>
+      <result name="differentPackageAction" type="chain">/actionChainTest2/anotherAction</result>
+
+
+      <result name="nonExistingAction" type="chain"><error>INVALID_VALUE</error></result>
+    </action>
+
+    <action name="actionPath2"/>
+
+  </package>
+
+
+  <package name="actionChainTest2" namespace="/actionChainTest2">
+
+    <action name="anotherAction"/>
+
+  </package>
+
+</struts>

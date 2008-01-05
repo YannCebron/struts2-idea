@@ -36,6 +36,7 @@ public class PathResolvingTestCase extends StrutsHighlightingTestCase<WebModuleF
     super.configureModule(moduleBuilder);
     moduleBuilder.addWebRoot(myFixture.getTempDirPath() + "/jsp/", "/");
     moduleBuilder.addWebRoot(myFixture.getTempDirPath() + "/jsp2/", "/2ndWebRoot/");
+    addStrutsJars(moduleBuilder);
   }
 
   /**
@@ -58,6 +59,17 @@ public class PathResolvingTestCase extends StrutsHighlightingTestCase<WebModuleF
     createStrutsFileSet("struts-actionpath.xml");
     final long duration = myFixture.testHighlighting(true, false, true, "struts-actionpath.xml");
     System.out.println("struts-actionpath.xml = " + duration);
+  }
+
+  /**
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainReferenceProvider}
+   *
+   * @throws Throwable On errors.
+   */
+  public void testActionChain() throws Throwable {
+    createStrutsFileSet("struts-actionchain.xml");
+    final long duration = myFixture.testHighlighting(true, false, true, "struts-actionchain.xml");
+    System.out.println("struts-actionchain.xml = " + duration);
   }
 
 }
