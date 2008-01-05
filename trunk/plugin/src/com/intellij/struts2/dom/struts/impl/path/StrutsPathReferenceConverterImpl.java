@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 public class StrutsPathReferenceConverterImpl extends StrutsPathReferenceConverter {
 
   private static final PathReferenceProvider[] MY_PATH_REFERENCE_PROVIDERS = new PathReferenceProvider[]{
-      new DispatchPathReferenceProvider(), new ActionPathReferenceProvider()};
+      new DispatchPathReferenceProvider(), new ActionPathReferenceProvider(), new ActionChainReferenceProvider()};
 
   public PathReference fromString(@Nullable final String value, final ConvertContext context) {
     if (value == null) {

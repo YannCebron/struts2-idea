@@ -31,6 +31,7 @@ import com.intellij.struts2.facet.configuration.StrutsFileSet;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 import com.intellij.testFramework.fixtures.*;
 
+import java.io.File;
 import java.util.Set;
 
 /**
@@ -75,6 +76,20 @@ public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuil
   protected void configureModule(final T moduleBuilder) throws Exception {
     moduleBuilder.addContentRoot(myFixture.getTempDirPath());
     moduleBuilder.addSourceRoot("");
+  }
+
+  /**
+   * Adds the S2 jars.
+   *
+   * @param moduleBuilder Current module builder.
+   * @throws Exception On internal errors.
+   */
+  protected void addStrutsJars(final T moduleBuilder) throws Exception {
+    final File testDataBasePathFile = new File(getTestDataBasePath()); // little hack to get absolute path..
+    moduleBuilder.addLibraryJars("struts-2",
+                                 testDataBasePathFile.getAbsolutePath(),
+                                 "struts2-core-2.1.0.jar",
+                                 "xwork-2.1.0.jar");
   }
 
   protected StrutsFacet createFacet() {

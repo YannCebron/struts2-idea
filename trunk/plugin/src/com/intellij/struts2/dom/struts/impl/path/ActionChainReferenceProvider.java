@@ -1,5 +1,5 @@
 /*
- * Copyright 2007 The authors
+ * Copyright 2008 The authors
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,6 +31,7 @@ import com.intellij.struts2.dom.struts.model.StrutsModel;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,14 +39,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides paths to "/XYZ.action".
+ * Provides paths to "actionName" for results with type="chain".
  *
  * @author Yann CŽbron
  */
-class ActionPathReferenceProvider implements PathReferenceProvider {
+public class ActionChainReferenceProvider implements PathReferenceProvider {
+
+  @NonNls
+  public static final String RESULT_TYPE_CHAIN = "chain";
 
   public boolean createReferences(@NotNull final PsiElement psiElement,
-                                  @NotNull final List<PsiReference> references,
+                                  final @NotNull List<PsiReference> references,
                                   final boolean soft) {
     final StrutsModel model = StrutsManager.getInstance(psiElement.getProject())
         .getModelByFile((XmlFile) psiElement.getContainingFile());
@@ -53,40 +57,33 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
       return false;
     }
 
-
     final DomElement resultElement = DomUtil.getDomElement(psiElement);
     if (resultElement == null) {
       return false; // XML syntax error
     }
-    final StrutsPackage strutsPackage = resultElement.getParentOfType(StrutsPackage.class, true);
-    if (strutsPackage == null) {
-      return false; // XML syntax error
-    }
+
 
     final XmlTag resultTag = resultElement.getXmlTag();
     if (resultTag == null) {
       return false; // XML syntax error
     }
 
-    // skip "chain" results
     final String dispatcherType = resultTag.getAttributeValue("type");
-    if (ActionChainReferenceProvider.RESULT_TYPE_CHAIN.equals(dispatcherType)) {
+    if (!RESULT_TYPE_CHAIN.equals(dispatcherType)) {
       return false;
     }
 
+    final StrutsPackage strutsPackage = resultElement.getParentOfType(StrutsPackage.class, true);
+    if (strutsPackage == null) {
+      return false; // XML syntax error
+    }
     final String currentPackage = strutsPackage.searchNamespace();
 
-    final String actionExtension = ".action";   // TODO determine extension, property struts.action.extension
-
-    final PsiReference actionReference = new PsiReferenceBase<PsiElement>(psiElement) {
+    final PsiReference chainReference = new PsiReferenceBase<PsiElement>(psiElement) {
 
       public PsiElement resolve() {
         final XmlTagValue tagValue = ((XmlTag) psiElement).getValue();
         final String path = tagValue.getText();
-        final int extensionIndex = path.lastIndexOf(actionExtension);
-        if (extensionIndex == -1) {
-          return null;
-        }
 
         // use given namespace or current if none given
         final int namespacePrefixIndex = path.lastIndexOf("/");
@@ -97,19 +94,12 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
           namespace = currentPackage;
         }
 
-        // "/XX/" behind ".action" --> not parseable
-        if (namespacePrefixIndex > extensionIndex) {
-          return null;
-        }
-
-        final String strippedPath = path.substring(namespacePrefixIndex != -1 ? namespacePrefixIndex + 1 : 0,
-                                                   extensionIndex);
+        final String strippedPath = path.substring(namespacePrefixIndex != -1 ? namespacePrefixIndex + 1 : 0);
         final List<Action> actions = model.findActionsByName(strippedPath, namespace);
         if (actions.size() == 1) {
           final Action action = actions.get(0);
           return action.getXmlTag();
         }
-
         return null;
       }
 
@@ -127,9 +117,9 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
             final String actionNamespace = action.getNamespace();
             final String fullPath;
             if (!actionNamespace.equals(StrutsPackage.DEFAULT_NAMESPACE) && !isInCurrentPackage) {
-              fullPath = actionNamespace + "/" + actionPath + actionExtension;
+              fullPath = actionNamespace + "/" + actionPath;
             } else {
-              fullPath = actionPath + actionExtension;
+              fullPath = actionPath;
             }
 
             final LookupItem<ActionLookupItem> item = new LookupItem<ActionLookupItem>(actionItem, fullPath);
@@ -140,9 +130,10 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
 
         return variants.toArray(new Object[variants.size()]);
       }
+
     };
 
-    references.add(actionReference);
+    references.add(chainReference);
     return false;
   }
 

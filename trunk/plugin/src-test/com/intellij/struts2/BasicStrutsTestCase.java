@@ -24,13 +24,22 @@ import org.jetbrains.annotations.NonNls;
 public abstract class BasicStrutsTestCase extends UsefulTestCase {
 
   /**
-   * Return absolute path to the test data. Not intended to be overrided.
+   * Return absolute full path to the test data. Not intended to be overrided.
    *
    * @return absolute path to the test data.
    */
   @NonNls
   protected final String getTestDataPath() {
-    return "./plugin/testData/" + getTestDataLocation();
+    return getTestDataBasePath() + getTestDataLocation();
+  }
+
+  /**
+   * Returns the base path for all testdata directories.
+   *
+   * @return "./plugin/testData/"
+   */
+  protected final String getTestDataBasePath() {
+    return "./plugin/testData/";
   }
 
   /**
