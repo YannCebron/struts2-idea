@@ -16,12 +16,8 @@
 package com.intellij.struts2.dom.struts.impl.path;
 
 import com.intellij.codeInsight.lookup.LookupItem;
-import com.intellij.codeInsight.lookup.LookupValueWithPriority;
-import com.intellij.codeInsight.lookup.LookupValueWithPsiElement;
-import com.intellij.codeInsight.lookup.LookupValueWithUIHint;
 import com.intellij.openapi.paths.PathReference;
 import com.intellij.openapi.paths.PathReferenceProvider;
-import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
@@ -35,12 +31,9 @@ import com.intellij.struts2.dom.struts.model.StrutsModel;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.DomUtil;
-import com.intellij.util.xml.ElementPresentationManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -146,64 +139,6 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
   @Nullable
   public PathReference getPathReference(@NotNull final String path, @NotNull final PsiElement element) {
     return new PathReference(path, new PathReference.ConstFunction(StrutsIcons.ACTION));
-  }
-
-
-  /**
-   * Represents one lookup value for an Action.
-   */
-  private static class ActionLookupItem implements LookupValueWithUIHint,
-                                                   LookupValueWithPriority,
-                                                   LookupValueWithPsiElement,
-                                                   Iconable {
-
-    private final Action action;
-    private final boolean bold;
-
-    /**
-     * CTOR.
-     *
-     * @param action Action to build the lookup element for.
-     * @param bold   Whether to render this element in bold.
-     */
-    private ActionLookupItem(final Action action, final boolean bold) {
-      this.action = action;
-      this.bold = bold;
-    }
-
-    public String getTypeHint() {
-      return action.getNamespace();
-    }
-
-    public Color getColorHint() {
-      return null;
-    }
-
-    public boolean isBold() {
-      return bold;
-    }
-
-    public String getPresentation() {
-      return action.getName().getStringValue();
-    }
-
-    /**
-     * Sort only actions of current package first, rest behind everything else.
-     *
-     * @return 1 or -1.
-     */
-    public int getPriority() {
-      return bold ? LookupValueWithPriority.HIGHER : -1;
-    }
-
-    public Icon getIcon(final int flags) {
-      return ElementPresentationManager.getIcon(action);
-    }
-
-    public PsiElement getElement() {
-      return action.getXmlTag();
-    }
-
   }
 
 }
