@@ -65,7 +65,7 @@ public class StrutsVersionDetector {
   }
 
   @Nullable
-  public static VirtualFile getStrutsClass(final GlobalSearchScope scope, final PsiManager psiManager) {
+  private static VirtualFile getStrutsClass(final GlobalSearchScope scope, final PsiManager psiManager) {
     final PsiClass psiClass = psiManager.findClass("org.apache.struts2.StrutsConstants", scope);
     if (psiClass == null) {
       return null;
@@ -78,7 +78,7 @@ public class StrutsVersionDetector {
   }
 
   @Nullable
-  public static ZipFile getStrutsJar(final GlobalSearchScope scope, final PsiManager psiManager) throws IOException {
+  private static ZipFile getStrutsJar(final GlobalSearchScope scope, final PsiManager psiManager) throws IOException {
     final VirtualFile virtualFile = getStrutsClass(scope, psiManager);
     if (virtualFile == null || !(virtualFile.getFileSystem() instanceof JarFileSystem)) {
       return null;
