@@ -72,7 +72,7 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
     final String currentPackage = strutsPackage.searchNamespace();
 
 
-    final String actionExtension = ".action";   // TODO determine extension
+    final String actionExtension = ".action";   // TODO determine extension, property struts.action.extension
 
     final PsiReference actionReference = new PsiReferenceBase<PsiElement>(psiElement) {
 
