@@ -20,6 +20,7 @@
 
       <result name="invalidNonExistingAction"><error>INVALID_VALUE.action</error></result>
       <result name="invalidActionExtension"><error>actionPath1.INVALID_VALUE</error></result>
+      <result name="invalidMustHaveExtension"><error>actionPath1</error></result>
     </action>
 
   </package>
