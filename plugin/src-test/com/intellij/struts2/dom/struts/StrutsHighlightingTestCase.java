@@ -40,21 +40,15 @@ public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase 
   }
 
   public void testParam() throws Throwable {
-    createStrutsFileSet("param-struts.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "param-struts.xml");
-    System.out.println("param-struts.xml = " + duration);
+    performHighlightingTest("param-struts.xml");
   }
 
   public void testExceptionMapping() throws Throwable {
-    createStrutsFileSet("exceptionmapping-struts.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "exceptionmapping-struts.xml");
-    System.out.println("exceptionmapping-struts.xml = " + duration);
+    performHighlightingTest("exceptionmapping-struts.xml");
   }
 
   public void testStrutsDefault() throws Throwable {
-    createStrutsFileSet("struts-default.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "struts-default.xml");
-    System.out.println("struts-default.xml = " + duration);
+    performHighlightingTest("struts-default.xml");
   }
 
 }

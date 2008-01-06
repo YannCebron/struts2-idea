@@ -45,9 +45,7 @@ public class PathResolvingTestCase extends BasicStrutsHighlightingTestCase<WebMo
    * @throws Throwable On errors.
    */
   public void testPathDispatcher() throws Throwable {
-    createStrutsFileSet("struts-path-dispatcher.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "struts-path-dispatcher.xml");
-    System.out.println("struts-path-dispatcher.xml = " + duration);
+    performHighlightingTest("struts-path-dispatcher.xml");
   }
 
   /**
@@ -56,9 +54,7 @@ public class PathResolvingTestCase extends BasicStrutsHighlightingTestCase<WebMo
    * @throws Throwable On errors.
    */
   public void testActionPath() throws Throwable {
-    createStrutsFileSet("struts-actionpath.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "struts-actionpath.xml");
-    System.out.println("struts-actionpath.xml = " + duration);
+    performHighlightingTest("struts-actionpath.xml");
   }
 
   /**
@@ -67,31 +63,27 @@ public class PathResolvingTestCase extends BasicStrutsHighlightingTestCase<WebMo
    * @throws Throwable On errors.
    */
   public void testActionChain() throws Throwable {
-    createStrutsFileSet("struts-actionchain.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "struts-actionchain.xml");
-    System.out.println("struts-actionchain.xml = " + duration);
+    performHighlightingTest("struts-actionchain.xml");
   }
 
   public void testCompletionVariantsDispatcherActionPath() throws Throwable {
-    createStrutsFileSet("struts-completionvariants.xml");
-    myFixture.testCompletionVariants("struts-completionvariants.xml",
-                                     "/anotherActionPathTest/anotherActionPath1.action",
-                                     "2ndWebRoot",
-                                     "WEB-INF",
-                                     "actionPath1.action",
-                                     "index.jsp",
-                                     "jsp2-index.jsp");
+    performCompletionVariantTest("struts-completionvariants.xml",
+                                 "/anotherActionPathTest/anotherActionPath1.action",
+                                 "2ndWebRoot",
+                                 "WEB-INF",
+                                 "actionPath1.action",
+                                 "index.jsp",
+                                 "jsp2-index.jsp");
   }
 
   public void testCompletionVariantsChain() throws Throwable {
-    createStrutsFileSet("struts-completionvariants-chain.xml");
-    myFixture.testCompletionVariants("struts-completionvariants-chain.xml",
-                                     "/anotherActionPathTest/anotherActionPath1",
-                                     "2ndWebRoot",
-                                     "WEB-INF",
-                                     "actionPath1",
-                                     "index.jsp",
-                                     "jsp2-index.jsp");
+    performCompletionVariantTest("struts-completionvariants-chain.xml",
+                                 "/anotherActionPathTest/anotherActionPath1",
+                                 "2ndWebRoot",
+                                 "WEB-INF",
+                                 "actionPath1",
+                                 "index.jsp",
+                                 "jsp2-index.jsp");
   }
 
 }
