@@ -27,11 +27,13 @@ import org.jetbrains.annotations.NotNull;
 public interface ResultType extends DomElement {
 
   @NameValue
+  @Required
   @NotNull
   GenericAttributeValue<String> getName();
 
   @Attribute(value = "class")
   @ExtendClass(value = "com.opensymphony.xwork2.Result", allowAbstract = false, allowInterface = false)
+  @Required
   GenericAttributeValue<PsiClass> getResultTypeClass();
 
   GenericAttributeValue<Boolean> getDefault();
