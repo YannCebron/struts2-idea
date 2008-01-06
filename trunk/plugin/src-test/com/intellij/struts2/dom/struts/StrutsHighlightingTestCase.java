@@ -75,7 +75,7 @@ public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuil
 
   protected void configureModule(final T moduleBuilder) throws Exception {
     moduleBuilder.addContentRoot(myFixture.getTempDirPath());
-    moduleBuilder.addSourceRoot("");
+    moduleBuilder.addSourceRoot("src");
   }
 
   /**
