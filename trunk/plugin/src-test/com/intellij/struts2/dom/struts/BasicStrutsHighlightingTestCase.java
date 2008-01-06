@@ -131,6 +131,31 @@ public abstract class BasicStrutsHighlightingTestCase<T extends JavaModuleFixtur
     strutsFileSetSet.add(fileSet);
   }
 
+  /**
+   * Performs highlighting test for the given struts.xml file.
+   *
+   * @param strutsXmlFileName Filename of struts.xml to check.
+   * @throws Throwable On any errors.
+   */
+  protected void performHighlightingTest(final String strutsXmlFileName) throws Throwable {
+    createStrutsFileSet(strutsXmlFileName);
+    final long duration = myFixture.testHighlighting(true, false, true, strutsXmlFileName);
+    System.out.println(strutsXmlFileName + " = " + duration);
+  }
+
+  /**
+   * Performs completion variants test for the given struts.xml file.
+   *
+   * @param strutsXmlFileName Filename of struts.xml to check.
+   * @param expectedItems     Expected completion variants.
+   * @throws Throwable On any errors.
+   */
+  protected void performCompletionVariantTest(final String strutsXmlFileName, final String... expectedItems)
+      throws Throwable {
+    createStrutsFileSet(strutsXmlFileName);
+    myFixture.testCompletionVariants(strutsXmlFileName, expectedItems);
+  }
+
   protected void tearDown() throws Exception {
     myFixture.tearDown();
     myFixture = null;
