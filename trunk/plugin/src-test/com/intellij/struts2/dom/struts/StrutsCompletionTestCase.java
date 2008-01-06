@@ -31,22 +31,28 @@ public class StrutsCompletionTestCase extends BasicStrutsHighlightingTestCase {
     addStrutsJars(moduleBuilder);
   }
 
-  public void testCompletionVariantsResult() throws Throwable {
-    performCompletionVariantTest("struts-completionvariants-result.xml",
+  public void testCompletionVariantsResultType() throws Throwable {
+    performCompletionVariantTest("struts-completionvariants-result_type.xml",
                                  "chain",
                                  "dispatcher",
                                  "freemarker",
                                  "httpheader");
   }
 
-  public void testCompletionVariantsResultExtendingPackage() throws Throwable {
-    performCompletionVariantTest("struts-completionvariants-result-extending.xml",
+  public void testCompletionVariantsResultTypeExtendingPackage() throws Throwable {
+    performCompletionVariantTest("struts-completionvariants-result_type-extending.xml",
                                  "chain",
                                  "dispatcher",
                                  "freemarker",
                                  "httpheader",
                                  "velocity");
 
+  }
+
+  public void testCompletionVariantsPackageExtends() throws Throwable {
+    performCompletionVariantTest("struts-completionvariants-package_extends.xml",
+                                 "extendTest",
+                                 "extendTest2");
   }
 
 }
