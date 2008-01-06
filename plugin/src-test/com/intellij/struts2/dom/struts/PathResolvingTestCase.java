@@ -72,4 +72,26 @@ public class PathResolvingTestCase extends BasicStrutsHighlightingTestCase<WebMo
     System.out.println("struts-actionchain.xml = " + duration);
   }
 
+  public void testCompletionVariantsDispatcherActionPath() throws Throwable {
+    createStrutsFileSet("struts-completionvariants.xml");
+    myFixture.testCompletionVariants("struts-completionvariants.xml",
+                                     "/anotherActionPathTest/anotherActionPath1.action",
+                                     "2ndWebRoot",
+                                     "WEB-INF",
+                                     "actionPath1.action",
+                                     "index.jsp",
+                                     "jsp2-index.jsp");
+  }
+
+  public void testCompletionVariantsChain() throws Throwable {
+    createStrutsFileSet("struts-completionvariants-chain.xml");
+    myFixture.testCompletionVariants("struts-completionvariants-chain.xml",
+                                     "/anotherActionPathTest/anotherActionPath1",
+                                     "2ndWebRoot",
+                                     "WEB-INF",
+                                     "actionPath1",
+                                     "index.jsp",
+                                     "jsp2-index.jsp");
+  }
+
 }
