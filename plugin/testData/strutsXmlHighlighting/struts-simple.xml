@@ -149,14 +149,21 @@
 
   <package name="testResultType">
     <result-types>
+
+      <!-- "class" -->
       <result-type name="validSubClass" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
       <result-type name="invalidSubClass" class="<error>MyClass</error>"/>
 
-      <!-- name must be non-empty -->
+      <!-- "name" -->
+      <!-- must be non-empty -->
       <result-type name=<error>""</error> class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
 
       <result-type name="<error>DUPLICATED_NAME</error>" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
       <result-type name="<error>DUPLICATED_NAME</error>" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
+
+      <!-- default TODO only one "true" per package allowed -->
+      <result-type name="validDefaultValue_true" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true"/>
+      <result-type name="validDefaultValue_false" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="false"/>
     </result-types>
 
   </package>
