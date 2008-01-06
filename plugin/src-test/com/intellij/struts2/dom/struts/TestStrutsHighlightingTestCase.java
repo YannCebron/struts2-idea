@@ -15,13 +15,16 @@
 
 package com.intellij.struts2.dom.struts;
 
+import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
+
 /**
  * @author Yann CŽbron
  */
 public class TestStrutsHighlightingTestCase extends StrutsHighlightingTestCase {
 
-  protected void setUp() throws Exception {
-    super.setUp();
+  protected void configureModule(final JavaModuleFixtureBuilder moduleBuilder) throws Exception {
+    super.configureModule(moduleBuilder);
+    addStrutsJars(moduleBuilder);
   }
 
   protected String getTestDataLocation() {
@@ -29,9 +32,9 @@ public class TestStrutsHighlightingTestCase extends StrutsHighlightingTestCase {
   }
 
   public void testHighlightSimpleStruts() throws Throwable {
-    createStrutsFileSet("struts.xml", "include-struts.xml");
-    final long duration = myFixture.testHighlighting(true, false, true, "struts.xml");
-    System.out.println("struts.xml = " + duration);
+    createStrutsFileSet("struts-simple.xml", "include-struts.xml");
+    final long duration = myFixture.testHighlighting(true, false, true, "struts-simple.xml");
+    System.out.println("struts-simple.xml = " + duration);
   }
 
   public void testParams() throws Throwable {
@@ -46,4 +49,10 @@ public class TestStrutsHighlightingTestCase extends StrutsHighlightingTestCase {
     System.out.println("exceptionmapping-struts.xml = " + duration);
   }
 
+  public void testStrutsDefault() throws Throwable {
+    createStrutsFileSet("struts-default.xml");
+    final long duration = myFixture.testHighlighting(true, false, true, "struts-default.xml");
+    System.out.println("struts-default.xml = " + duration);
+  }
+  
 }
