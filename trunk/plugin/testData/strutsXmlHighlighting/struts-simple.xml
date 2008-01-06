@@ -4,7 +4,7 @@
   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
   "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-<!-- basic DOM tests -->
+<!-- Basic DOM tests -->
 
 <struts>
 
@@ -39,8 +39,8 @@
   <bean class="MyClass" name="<error> </error>"/>
 
   <!-- TODO must be unique within same "type"-elements -->
-  <bean class="MyClass" name="duplicatedName"/>
-  <bean class="MyClass" name="duplicatedName"/>
+  <bean class="MyClass" name="DUPLICATED_NAME"/>
+  <bean class="MyClass" name="DUPLICATED_NAME"/>
 
 
   <!-- INCLUDE =================================================================================================== -->
@@ -58,8 +58,8 @@
   <package name="validName"/>
   <package name=<error>""</error>/>
   <package name="<error> </error>"/>
-  <package name="<error>duplicatedName</error>"/>
-  <package name="<error>duplicatedName</error>"/>
+  <package name="<error>DUPLICATED_NAME</error>"/>
+  <package name="<error>DUPLICATED_NAME</error>"/>
 
   <!-- "namespace" -->
   <package name="emptyName" namespace=<error>""</error>/>
@@ -93,8 +93,8 @@
     <action name="validName"/>
     <action name=<error>""</error>/>
     <action name="<error> </error>"/>
-    <action name="<error>duplicatedName</error>"/>
-    <action name="<error>duplicatedName</error>"/>
+    <action name="<error>DUPLICATED_NAME</error>"/>
+    <action name="<error>DUPLICATED_NAME</error>"/>
   </package>
 
   <!-- "class" -->
@@ -120,15 +120,44 @@
   <!-- RESULT, locations are tested in "path" =================================================================== -->
 
   <package name="testResult">
+    
+    <result-types>
+      <result-type name="dispatcher" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true"/>
+    </result-types>
 
-    <action name="testResultAction">
+    <!-- "name" -->
+    <action name="testResultNames">
       <!-- default name = success, cannot have two -->
       <<error>result</error>>testResultAction.action</result>
       <<error>result</error>>testResultAction.action</result>
 
-      <result name="<error>duplicateName</error>">testResultAction.action</result>
-      <result name="<error>duplicateName</error>">testResultAction.action</result>
+      <result name="<error>DUPLICATED_NAME</error>">testResultAction.action</result>
+      <result name="<error>DUPLICATED_NAME</error>">testResultAction.action</result>
     </action>
+
+    <!-- "type" -->
+    <action name="testResultTypeAttribute">
+      <result name="validEmptyResultType">testResultTypes.action</result>
+      <result name="validResultType" type="dispatcher">testResultTypes.action</result>
+      <result name="invalidResultType" type="<error>INVALID_VALUE</error>">testResultTypes.action</result>
+    </action>
+
+  </package>
+
+
+  <!-- RESULT-TYPE ============================================================================================== -->
+
+  <package name="testResultType">
+    <result-types>
+      <result-type name="validSubClass" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
+      <result-type name="invalidSubClass" class="<error>MyClass</error>"/>
+
+      <!-- name must be non-empty -->
+      <result-type name=<error>""</error> class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
+
+      <result-type name="<error>DUPLICATED_NAME</error>" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
+      <result-type name="<error>DUPLICATED_NAME</error>" class="org.apache.struts2.dispatcher.ServletDispatcherResult"/>
+    </result-types>
 
   </package>
 

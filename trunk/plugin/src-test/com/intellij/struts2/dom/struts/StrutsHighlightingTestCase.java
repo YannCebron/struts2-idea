@@ -89,6 +89,8 @@ public abstract class StrutsHighlightingTestCase<T extends JavaModuleFixtureBuil
     moduleBuilder.addLibraryJars("struts-2",
                                  testDataBasePathFile.getAbsolutePath(),
                                  "struts2-core-2.1.0.jar",
+                                 "freemarker-2.3.10.jar",
+                                 "ognl-2.6.11.jar",
                                  "xwork-2.1.0.jar");
   }
 
