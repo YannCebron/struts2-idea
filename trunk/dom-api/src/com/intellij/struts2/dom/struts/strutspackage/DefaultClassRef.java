@@ -25,7 +25,7 @@ import com.intellij.util.xml.Required;
 /**
  * <code>default-class-ref</code>
  * <p/>
- * https://issues.apache.org/struts/browse/WW-1420
+ * TODO https://issues.apache.org/struts/browse/WW-1420
  *
  * @author Yann CŽbron
  */
