@@ -82,7 +82,9 @@ public class ValidatorManagerImpl extends ValidatorManager {
     final PsiManager psiManager = PsiManager.getInstance(project);
 
     final VirtualFile validatorsVirtualFile = ModuleUtil.findResourceFileInScope(VALIDATORS_XML, project,
-                                                                                 GlobalSearchScope.moduleRuntimeScope(module, false));
+                                                                                 GlobalSearchScope.moduleRuntimeScope(
+                                                                                     module,
+                                                                                     false));
 
     if (validatorsVirtualFile != null) {
       final PsiFile file = psiManager.findFile(validatorsVirtualFile);
@@ -93,8 +95,9 @@ public class ValidatorManagerImpl extends ValidatorManager {
     }
 
     // find com/opensymphony/xwork2/validator/validators/default.xml from xwork.jar
-    final PsiClass emailValidatorClass = psiManager.findClass("com.opensymphony.xwork2.validator.validators.EmailValidator",
-                                                              GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module));
+    final PsiClass emailValidatorClass = psiManager.findClass(
+        "com.opensymphony.xwork2.validator.validators.EmailValidator",
+        GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module));
     if (emailValidatorClass == null) {
       return null;
     }
@@ -107,12 +110,12 @@ public class ValidatorManagerImpl extends ValidatorManager {
 
     // go up one level to ../validators/
     final VirtualFile parent = file.getParent();
-    if (parent == null) {
-      return null;
-    }
+    assert parent != null : "error walking up to parent from EmailValidator.class, xwork JAR file=" + file;
 
-    final VirtualFile child = parent.findChild(VALIDATORS_DEFAULT_XML);
-    return child != null ? psiManager.findFile(child) : null;
+    final VirtualFile vfDefaultXml = parent.findChild(VALIDATORS_DEFAULT_XML);
+    assert vfDefaultXml != null : "VF for default.xml null, parent=" + parent;
+
+    return psiManager.findFile(vfDefaultXml);
   }
 
 }
