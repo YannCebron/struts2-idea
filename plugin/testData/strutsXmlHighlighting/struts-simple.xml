@@ -50,6 +50,8 @@
   <include file="<error>INVALID_VALUE</error>"/>
   <!-- valid struts.xml not in fileset -->
   <include file="<error>struts-notinfileset.xml</error>"/>
+  <!-- self-inclusion is prohibited -->
+  <include file="<error>struts-simple.xml</error>"/>
 
 
   <!-- PACKAGE =================================================================================================== -->
