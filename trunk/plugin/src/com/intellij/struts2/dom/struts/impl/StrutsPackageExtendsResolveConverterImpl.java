@@ -51,8 +51,6 @@ public class StrutsPackageExtendsResolveConverterImpl extends StrutsPackageExten
     }
 
     final StrutsModel strutsModel = ConverterUtil.getStrutsModel(context);
-
-    // current struts.xml not in DOM-Model
     if (strutsModel == null) {
       return null;
     }

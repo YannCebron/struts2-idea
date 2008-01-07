@@ -35,7 +35,7 @@ public final class ConverterUtil {
    *
    * @param context Invoking context.
    *
-   * @return <code>null</code> if no StrutsModel found by current file.
+   * @return <code>null</code> if no StrutsModel found by current file (e.g. not in any fileset).
    */
   @Nullable
   public static StrutsModel getStrutsModel(final ConvertContext context) {
