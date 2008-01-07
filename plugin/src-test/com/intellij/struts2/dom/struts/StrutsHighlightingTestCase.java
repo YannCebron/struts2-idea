@@ -22,7 +22,7 @@ import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
  *
  * @author Yann CŽbron
  */
-public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase {
+public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase<JavaModuleFixtureBuilder> {
 
   protected void configureModule(final JavaModuleFixtureBuilder moduleBuilder) throws Exception {
     super.configureModule(moduleBuilder);
