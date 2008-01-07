@@ -34,17 +34,17 @@ public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase 
   }
 
   public void testSimpleStruts() throws Throwable {
-    createStrutsFileSet("struts-simple.xml", "include-struts.xml");
+    createStrutsFileSet("struts-simple.xml", "struts-include-me.xml");
     final long duration = myFixture.testHighlighting(true, false, true, "struts-simple.xml");
     System.out.println("struts-simple.xml = " + duration);
   }
 
   public void testParam() throws Throwable {
-    performHighlightingTest("param-struts.xml");
+    performHighlightingTest("struts-param.xml");
   }
 
   public void testExceptionMapping() throws Throwable {
-    performHighlightingTest("exceptionmapping-struts.xml");
+    performHighlightingTest("struts-exceptionmapping.xml");
   }
 
   public void testStrutsDefault() throws Throwable {

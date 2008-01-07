@@ -45,11 +45,11 @@
 
   <!-- INCLUDE =================================================================================================== -->
 
-  <include file="include-struts.xml"/>
+  <include file="struts-include-me.xml"/>
   <!-- non-existing file -->
   <include file="<error>INVALID_VALUE</error>"/>
   <!-- valid struts.xml not in fileset -->
-  <include file="<error>notinfileset-struts.xml</error>"/>
+  <include file="<error>struts-notinfileset.xml</error>"/>
 
 
   <!-- PACKAGE =================================================================================================== -->
