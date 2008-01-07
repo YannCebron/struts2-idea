@@ -82,7 +82,7 @@
 
   <!-- INTERCEPTOR-REF =================================================== -->
 
-  <package name="testInterceptorParams">
+  <package name="testInterceptorRefParams">
 
     <interceptors>
 
