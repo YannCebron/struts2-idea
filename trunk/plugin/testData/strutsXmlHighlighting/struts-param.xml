@@ -79,4 +79,24 @@
 
   </package>
 
+
+  <!-- INTERCEPTOR-REF =================================================== -->
+
+  <package name="testInterceptorParams">
+
+    <interceptors>
+
+      <interceptor name="validation" class="org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor"/>
+
+      <interceptor-stack name="testStack">
+        <interceptor-ref name="validation">
+          <param name="excludeMethods">someMethodName</param>
+          <param name="<error>INVALID_VALUE</error>"/>
+        </interceptor-ref>
+      </interceptor-stack>
+
+    </interceptors>
+
+  </package>
+
 </struts>
