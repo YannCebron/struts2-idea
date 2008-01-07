@@ -10,7 +10,7 @@
 
   <!-- ACTION ============================================================= -->
 
-  <package name="testParams">
+  <package name="testActionParams">
 
     <action name="testParams" class="MyClass">
       <param name="param1">someValue</param>
@@ -22,6 +22,20 @@
       <param name="<error>param1</error>">someValue</param>
       <param name="<error>param1</error>">someValue2</param>
     </action>
+
+  </package>
+
+
+  <!-- DEFAULT-ACTION-REF ================================================ -->
+
+  <package name="testDefaultActionRefParams">
+
+    <default-action-ref name="defaultAction">
+      <param name="param1">someValue</param>
+      <param name="<error>INVALID_VALUE</error>"/>
+    </default-action-ref>
+
+    <action name="defaultAction" class="MyClass"/>
 
   </package>
 
