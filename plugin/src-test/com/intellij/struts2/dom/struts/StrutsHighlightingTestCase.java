@@ -51,4 +51,8 @@ public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase<
     performHighlightingTest("struts-default.xml");
   }
 
+  public void testXWorkDefault() throws Throwable {
+    performHighlightingTest("xwork-default.xml");
+  }
+
 }
