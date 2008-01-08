@@ -52,4 +52,14 @@ public class StrutsCompletionTestCase extends BasicStrutsHighlightingTestCase<Ja
                                  "extendTest", "extendTest2");
   }
 
+  /**
+   * {@link  com.intellij.struts2.dom.struts.strutspackage.InterceptorRefResolveConverter}
+   *
+   * @throws Throwable On any errors.
+   */
+  public void testCompletionVariantsInterceptorRef() throws Throwable {
+    performCompletionVariantTest("struts-completionvariants-interceptor-ref.xml",
+                                 "alias", "autowiring", "chain", "testInterceptorRefStack");
+  }
+
 }
