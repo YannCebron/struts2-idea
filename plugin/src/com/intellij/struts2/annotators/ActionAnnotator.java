@@ -23,6 +23,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiIdentifier;
 import com.intellij.psi.PsiModifier;
 import com.intellij.struts2.StrutsIcons;
 import com.intellij.struts2.dom.struts.action.Action;
@@ -51,16 +52,21 @@ public class ActionAnnotator implements Annotator {
     };
 
   public void annotate(final PsiElement psiElement, final AnnotationHolder holder) {
-    if (!(psiElement instanceof PsiClass)) {
+    if (!(psiElement instanceof PsiIdentifier)) {
       return;
     }
 
+    final PsiElement parentPsiElement = psiElement.getParent();
+    if (!(parentPsiElement instanceof PsiClass)) {
+      return;
+    }
+    
     // do not run on classes within JSPs
     if (psiElement.getContainingFile().getFileType() != StdFileTypes.JAVA) {
       return;
     }
 
-    final PsiClass clazz = (PsiClass) psiElement;
+    final PsiClass clazz = (PsiClass) parentPsiElement;
 
     // do not run on non-public, abstract classes or interfaces
     if (clazz.isInterface() ||
