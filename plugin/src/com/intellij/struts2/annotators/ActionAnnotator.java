@@ -29,6 +29,7 @@ import com.intellij.struts2.StrutsIcons;
 import com.intellij.struts2.dom.struts.action.Action;
 import com.intellij.struts2.dom.struts.model.StrutsManager;
 import com.intellij.struts2.dom.struts.model.StrutsModel;
+import com.intellij.struts2.facet.StrutsFacet;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,13 +44,13 @@ import java.util.List;
 public class ActionAnnotator implements Annotator {
 
   private static final DomElementListCellRenderer ACTION_RENDERER =
-    new DomElementListCellRenderer<Action>("No name") {
-      @NotNull
-      @NonNls
-      public String getAdditionalLocation(final Action action) {
-        return action != null ? "[" + action.getNamespace() + "] " : "";
-      }
-    };
+      new DomElementListCellRenderer<Action>("No name") {
+        @NotNull
+        @NonNls
+        public String getAdditionalLocation(final Action action) {
+          return action != null ? "[" + action.getNamespace() + "] " : "";
+        }
+      };
 
   public void annotate(final PsiElement psiElement, final AnnotationHolder holder) {
     if (!(psiElement instanceof PsiIdentifier)) {
@@ -60,7 +61,7 @@ public class ActionAnnotator implements Annotator {
     if (!(parentPsiElement instanceof PsiClass)) {
       return;
     }
-    
+
     // do not run on classes within JSPs
     if (psiElement.getContainingFile().getFileType() != StdFileTypes.JAVA) {
       return;
@@ -76,7 +77,13 @@ public class ActionAnnotator implements Annotator {
       return;
     }
 
+    // short exit if Struts Facet not present
     final Module module = ModuleUtil.findModuleForPsiElement(clazz);
+    if (module == null ||
+         StrutsFacet.getInstance(module) == null) {
+      return;
+    }
+
     final StrutsManager strutsManager = StrutsManager.getInstance(psiElement.getProject());
     final StrutsModel strutsModel = strutsManager.getCombinedModel(module);
     if (strutsModel == null) {
@@ -86,10 +93,10 @@ public class ActionAnnotator implements Annotator {
     final List<Action> actions = strutsModel.findActionsByClass(clazz);
     if (!actions.isEmpty()) {
       NavigationGutterIconBuilder.create(StrutsIcons.ACTION, NavigationGutterIconBuilder.DEFAULT_DOM_CONVERTOR).
-        setPopupTitle("Go To Action declaration").
-        setTargets(actions).
-        setCellRenderer(ACTION_RENDERER).
-        install(holder, clazz.getNameIdentifier());
+          setPopupTitle("Go To Action declaration").
+          setTargets(actions).
+          setCellRenderer(ACTION_RENDERER).
+          install(holder, clazz.getNameIdentifier());
     }
 
   }
