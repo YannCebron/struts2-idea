@@ -18,7 +18,7 @@
   ]]>
   </change-notes>
 
-  <version>0.35</version>
+  <version>0.36</version>
 
   <!-- required dependencies -->
   <depends>com.intellij.javaee</depends>
@@ -31,7 +31,7 @@
           logo="/resources/icons/lineas.png">LINEAS Informationstechnik GmbH
   </vendor>
 
-  <idea-version since-build="7562" until-build="7999"/>
+  <idea-version since-build="7590" until-build="7999"/>
 
   <extensions xmlns="com.intellij">
     <errorHandler implementation="nu.studer.idea.errorreporting.PluginErrorReportSubmitter"/>
