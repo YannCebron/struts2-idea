@@ -298,44 +298,13 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="TestStrutsHighlightingTestCase" type="JUnit" factoryName="JUnit" enabled="false" merge="true">
+    <configuration default="false" name="StrutsCompletionTestCase" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.intellij.struts2.*" />
       <module name="struts2-plugin" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.intellij.struts2.dom.struts" />
-      <option name="MAIN_CLASS_NAME" value="com.intellij.struts2.dom.struts.TestStrutsHighlightingTestCase" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="1102" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
-    <configuration default="false" name="PathResolvingTestCase" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <pattern value="com.intellij.struts2.*" />
-      <module name="struts2-plugin" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.intellij.struts2.dom.struts" />
-      <option name="MAIN_CLASS_NAME" value="com.intellij.struts2.dom.struts.PathResolvingTestCase" />
+      <option name="MAIN_CLASS_NAME" value="com.intellij.struts2.dom.struts.StrutsCompletionTestCase" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
@@ -354,14 +323,15 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="All in struts2-plugin" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+    <configuration default="false" name="ValidationHighlightingTestCase" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="com.intellij.struts2.dom.validator.*" />
       <module name="struts2-plugin" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="com.intellij.struts2.dom.validator" />
+      <option name="MAIN_CLASS_NAME" value="com.intellij.struts2.dom.validator.ValidationHighlightingTestCase" />
       <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -369,7 +339,7 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="ADDITIONAL_CLASS_PATH" />
       <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
+        <value defaultName="wholeProject" />
       </option>
       <envs />
       <RunnerSettings RunnerId="Run" />
@@ -455,7 +425,7 @@
           <option name="filler" value=" " />
         </value>
       </option>
-      <option name="notice" value="Copyright &amp;#36;today.year The authors&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License." />
+      <option name="notice" value="Copyright 2008 The authors&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License.&#10;" />
       <option name="keyword" value="Copyright" />
       <option name="fileTypeOverride" value="4" />
       <option name="relativeBefore" value="true" />
@@ -478,7 +448,7 @@
       </option>
       <option name="notice" value="Copyright (c) &amp;#36;today.year, Your Corporation. All Rights Reserved." />
       <option name="keyword" value="Copyright" />
-      <option name="fileTypeOverride" value="1" />
+      <option name="fileTypeOverride" value="2" />
       <option name="relativeBefore" value="true" />
       <option name="addBlankAfter" value="true" />
       <option name="fileLocation" value="1" />
