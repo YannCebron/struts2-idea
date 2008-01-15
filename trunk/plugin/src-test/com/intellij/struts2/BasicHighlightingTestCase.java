@@ -23,12 +23,15 @@ import com.intellij.openapi.application.RunResult;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.struts2.facet.StrutsFacet;
 import com.intellij.struts2.facet.StrutsFacetType;
+import com.intellij.struts2.facet.configuration.StrutsFileSet;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 import com.intellij.testFramework.fixtures.*;
 
 import java.io.File;
+import java.util.Set;
 
 /**
  * Base class for highlighting tests.
@@ -125,6 +128,23 @@ public abstract class BasicHighlightingTestCase<T extends JavaModuleFixtureBuild
     myModule = null;
     myFacet = null;
     super.tearDown();
+  }
+
+  protected VirtualFile addFileToSet(final StrutsFileSet fileSet, final String path) {
+    final VirtualFile file = myFixture.getTempDirFixture().getFile(path);
+    assertTrue("cannot find file: " + path, file != null);
+    fileSet.addFile(file);
+    return file;
+  }
+
+  protected void createStrutsFileSet(final String... fileNames) {
+    final StrutsFileSet fileSet = new StrutsFileSet("test", "test");
+    for (final String fileName : fileNames) {
+      addFileToSet(fileSet, fileName);
+    }
+    final Set<StrutsFileSet> strutsFileSetSet = myFacet.getConfiguration().getFileSets();
+    strutsFileSetSet.clear();
+    strutsFileSetSet.add(fileSet);
   }
 
 }

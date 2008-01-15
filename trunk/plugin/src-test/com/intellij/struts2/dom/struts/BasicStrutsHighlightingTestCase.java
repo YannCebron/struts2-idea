@@ -16,13 +16,9 @@
 package com.intellij.struts2.dom.struts;
 
 import com.intellij.codeInspection.LocalInspectionTool;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.struts2.BasicHighlightingTestCase;
 import com.intellij.struts2.dom.inspection.Struts2ModelInspection;
-import com.intellij.struts2.facet.configuration.StrutsFileSet;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
-
-import java.util.Set;
 
 /**
  * Base class for struts.xml highlighting tests.
@@ -33,23 +29,6 @@ public abstract class BasicStrutsHighlightingTestCase<T extends JavaModuleFixtur
 
   protected LocalInspectionTool[] getHighlightingInspections() {
     return new LocalInspectionTool[]{new Struts2ModelInspection()};
-  }
-
-  protected VirtualFile addFileToSet(final StrutsFileSet fileSet, final String path) {
-    final VirtualFile file = myFixture.getTempDirFixture().getFile(path);
-    assertTrue("cannot find file: " + path, file != null);
-    fileSet.addFile(file);
-    return file;
-  }
-
-  protected void createStrutsFileSet(final String... fileNames) {
-    final StrutsFileSet fileSet = new StrutsFileSet("test", "test");
-    for (final String fileName : fileNames) {
-      addFileToSet(fileSet, fileName);
-    }
-    final Set<StrutsFileSet> strutsFileSetSet = myFacet.getConfiguration().getFileSets();
-    strutsFileSetSet.clear();
-    strutsFileSetSet.add(fileSet);
   }
 
   /**
