@@ -76,7 +76,6 @@ public class NamespaceReferenceProvider extends PsiReferenceProviderBase {
       for (final StrutsPackage strutsPackage : strutsModel.getStrutsPackages()) {
         final String namespace = strutsPackage.searchNamespace();
         variants.add(namespace);
-        //ContainerUtil.addIfNotNull(namespace, variants);
       }
       return variants.toArray(new Object[variants.size()]);
     }
