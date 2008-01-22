@@ -15,9 +15,16 @@
 
 package com.intellij.struts2.annotators;
 
+import com.intellij.codeInsight.navigation.NavigationGutterIconRenderer;
 import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.xml.XmlTag;
+import com.intellij.struts2.StrutsIcons;
 import com.intellij.struts2.dom.struts.BasicStrutsHighlightingTestCase;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Yann CŽbron
@@ -32,10 +39,40 @@ public class ActionAnnotatorTestCase extends BasicStrutsHighlightingTestCase {
     return "/gutterJava/actionClass/";
   }
 
+  /**
+   * Checks whether the gutter target elements resolve to the given Action names.
+   *
+   * @param gutterIconRenderer  Gutter icon renderer to check.
+   * @param expectedActionNames Names of the actions.
+   */
+  private static void checkGutterActionTargetElements(final GutterIconRenderer gutterIconRenderer,
+                                                      final String... expectedActionNames) {
+    assertNotNull(gutterIconRenderer);
+    assertEquals(gutterIconRenderer.getIcon(), StrutsIcons.ACTION);
+
+    assertTrue(gutterIconRenderer instanceof NavigationGutterIconRenderer);
+    final NavigationGutterIconRenderer gutter = (NavigationGutterIconRenderer) gutterIconRenderer;
+
+    final Set<String> foundActionNames = new HashSet<String>();
+    for (final PsiElement psiElement : gutter.getTargetElements()) {
+      assertTrue(psiElement + " != XmlTag", psiElement instanceof XmlTag);
+      final String actionName = ((XmlTag) psiElement).getAttributeValue("name");
+      foundActionNames.add(actionName);
+    }
+
+    assertSameElements(foundActionNames, expectedActionNames);
+  }
+
   public void testGutterMyAction() throws Throwable {
     createStrutsFileSet("struts-actionClass.xml");
     final GutterIconRenderer iconRenderer = myFixture.findGutter("/src/MyAction.java");
-    assertNotNull(iconRenderer);
+    checkGutterActionTargetElements(iconRenderer, "myActionPath");
+  }
+
+  public void testGutterMyActionMultipleMappings() throws Throwable {
+    createStrutsFileSet("struts-actionClass-multiple_mappings.xml");
+    final GutterIconRenderer iconRenderer = myFixture.findGutter("/src/MyAction.java");
+    checkGutterActionTargetElements(iconRenderer, "myActionPath1", "myActionPath2", "myActionPath3");
   }
 
 }
