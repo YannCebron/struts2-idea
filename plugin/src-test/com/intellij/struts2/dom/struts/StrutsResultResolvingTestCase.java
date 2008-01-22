@@ -58,12 +58,21 @@ public class StrutsResultResolvingTestCase extends BasicStrutsHighlightingTestCa
   }
 
   /**
-   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainReferenceProvider}
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectReferenceProvider}
    *
    * @throws Throwable On errors.
    */
   public void testActionChain() throws Throwable {
     performHighlightingTest("struts-actionchain.xml");
+  }
+
+  /**
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectReferenceProvider}
+   *
+   * @throws Throwable On errors.
+   */
+  public void testActionRedirect() throws Throwable {
+    performHighlightingTest("struts-actionRedirect.xml");
   }
 
   public void testCompletionVariantsDispatcherActionPath() throws Throwable {
