@@ -123,8 +123,9 @@ public abstract class ActionImpl implements Action {
         continue;
       }
 
-      // do not include "public String getXXX()" methods
-      if (PropertyUtil.isSimplePropertyGetter(psiMethod)) {
+      // do not include simple getters (with underlying field)
+      if (PropertyUtil.isSimplePropertyGetter(psiMethod) &&
+          actionClass.findFieldByName(PropertyUtil.getPropertyName(psiMethod), true) != null) {
         continue;
       }
 

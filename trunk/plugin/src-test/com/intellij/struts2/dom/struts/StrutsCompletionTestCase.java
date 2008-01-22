@@ -62,4 +62,16 @@ public class StrutsCompletionTestCase extends BasicStrutsHighlightingTestCase<Ja
                                  "alias", "autowiring", "chain", "testInterceptorRefStack");
   }
 
+  /**
+   * {@link  com.intellij.struts2.dom.struts.action.ActionMethodConverter}
+   *
+   * @throws Throwable On any errors.
+   */
+  public void testCompletionVariantsActionMethod() throws Throwable {
+    performCompletionVariantTest("struts-completionvariants-action_method.xml",
+                                 "validActionMethod",
+                                 "validActionMethodWithException",
+                                 "getValidActionMethodNoUnderlyingField");
+  }
+
 }
