@@ -15,9 +15,15 @@
 
 package com.intellij.struts2.annotators;
 
+import com.intellij.codeInsight.navigation.NavigationGutterIconRenderer;
 import com.intellij.openapi.editor.markup.GutterIconRenderer;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiMethod;
 import com.intellij.struts2.dom.struts.BasicStrutsHighlightingTestCase;
 import com.intellij.testFramework.builders.WebModuleFixtureBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Test for {@link JspActionAnnotator}
@@ -40,16 +46,40 @@ public class JspActionAnnotatorTestCase extends BasicStrutsHighlightingTestCase<
     addStrutsJars(moduleBuilder);
   }
 
+  /**
+   * Checks whether the gutter target elements resolve to the given action method names.
+   *
+   * @param gutterIconRenderer  Gutter icon renderer to check.
+   * @param expectedActionNames Names of the actions.
+   */
+  private static void checkGutterActionMethodTargetElements(final GutterIconRenderer gutterIconRenderer,
+                                                            final String... expectedActionNames) {
+    assertNotNull(gutterIconRenderer);
+    assertEquals(gutterIconRenderer.getIcon(), com.intellij.struts2.annotators.JspActionAnnotator.ACTION_CLASS_ICON);
+
+    assertTrue(gutterIconRenderer instanceof NavigationGutterIconRenderer);
+    final NavigationGutterIconRenderer gutter = (NavigationGutterIconRenderer) gutterIconRenderer;
+
+    final Set<String> foundActionNames = new HashSet<String>();
+    for (final PsiElement psiElement : gutter.getTargetElements()) {
+      assertTrue(psiElement + " != XmlTag", psiElement instanceof PsiMethod);
+      final String actionName = ((PsiMethod) psiElement).getName();
+      foundActionNames.add(actionName);
+    }
+
+    assertSameElements(foundActionNames, expectedActionNames);
+  }
+
   public void testGutterActionAttribute() throws Throwable {
     createStrutsFileSet("struts-actionClass.xml");
     final GutterIconRenderer iconRenderer = myFixture.findGutter("/jsp/test_gutter_action_attribute.jsp");
-    assertNotNull(iconRenderer);
+    checkGutterActionMethodTargetElements(iconRenderer, "validActionMethod");
   }
 
   public void testGutterNameAttribute() throws Throwable {
     createStrutsFileSet("struts-actionClass.xml");
     final GutterIconRenderer iconRenderer = myFixture.findGutter("/jsp/test_gutter_name_attribute.jsp");
-    assertNotNull(iconRenderer);
+    checkGutterActionMethodTargetElements(iconRenderer, "validActionMethod");
   }
 
 }
