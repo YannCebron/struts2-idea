@@ -22,6 +22,7 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.jsp.JspFileViewProvider;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.jsp.JspFile;
 import com.intellij.psi.xml.XmlDocument;
@@ -113,7 +114,12 @@ public class JspActionAnnotator implements Annotator {
 
   @Nullable
   private static String getUITaglibPrefix(final XmlTag xmlTag) {
-    final JspFile jspFile = (JspFile) xmlTag.getContainingFile();
+    final PsiFile containingFile = xmlTag.getContainingFile();
+    if (!(containingFile instanceof JspFile)) {
+      return null;
+    }
+
+    final JspFile jspFile = (JspFile) containingFile;
     final XmlDocument document = jspFile.getDocument();
     if (document == null) {
       return null;
