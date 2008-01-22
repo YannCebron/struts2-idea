@@ -111,11 +111,15 @@
   <package name="action6">
     <action name="actionMethod" class="MyClass" method="validActionMethod"/>
     <action name="actionMethodWithException" class="MyClass" method="validActionMethodWithException"/>
+    <action name="actionMethodGetterButNoField" class="MyClass" method="getValidActionMethodNoUnderlyingField"/>
+
     <action name="nonExistingActionMethod" class="MyClass" method="<error>INVALID_VALUE</error>"/>
     <action name="invalidActionMethodDueToWrongExceptionType" class="MyClass"
             method="<error>invalidActionMethodDueToWrongExceptionType</error>"/>
     <action name="invalidActionMethodDueToWrongReturnType" class="MyClass"
             method="<error>invalidActionMethodDueToWrongReturnType</error>"/>
+    <action name="invalidActionMethodIsSimplePropertyGetter" class="MyClass"
+            method="<error>getMyField</error>"/>
   </package>
 
 
