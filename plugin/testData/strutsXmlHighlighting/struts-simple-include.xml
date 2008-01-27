@@ -4,7 +4,7 @@
   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
   "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-<!-- used from struts.xml -->
+<!-- used from struts-simple.xml -->
 <struts>
 
   <package name="extendablePackage">
