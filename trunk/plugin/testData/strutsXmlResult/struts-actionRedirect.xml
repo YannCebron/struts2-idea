@@ -11,16 +11,16 @@
     <result-types>
       <result-type name="redirectAction" class="com.opensymphony.xwork2.ActionChainResult"/>
       <!-- deprecated name -->
-      <result-type name="redirect-Action" class="com.opensymphony.xwork2.ActionChainResult"/>
+      <result-type name="redirect-action" class="com.opensymphony.xwork2.ActionChainResult"/>
     </result-types>
 
     <action name="actionPath1">
       <result name="packageLocalActionName" type="redirectAction">actionPath2</result>
-      <result name="packageLocalActionName2" type="redirect-Action">actionPath2</result>
+      <result name="packageLocalActionName2" type="redirect-action">actionPath2</result>
       <result name="includingPackagePrefix" type="redirectAction">/actionChainTest/actionPath2</result>
-      <result name="includingPackagePrefix2" type="redirect-Action">/actionChainTest/actionPath2</result>
+      <result name="includingPackagePrefix2" type="redirect-action">/actionChainTest/actionPath2</result>
       <result name="differentPackageAction" type="redirectAction">/actionChainTest2/anotherAction</result>
-      <result name="differentPackageAction2" type="redirect-Action">/actionChainTest2/anotherAction</result>
+      <result name="differentPackageAction2" type="redirect-action">/actionChainTest2/anotherAction</result>
 
 
       <result name="nonExistingAction" type="redirectAction"><error>INVALID_VALUE</error></result>
