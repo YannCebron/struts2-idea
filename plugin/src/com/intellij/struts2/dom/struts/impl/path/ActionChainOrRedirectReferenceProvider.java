@@ -47,7 +47,7 @@ import java.util.List;
 public class ActionChainOrRedirectReferenceProvider implements PathReferenceProvider {
 
   @NonNls
-  private static final String[] RESULT_TYPES_CHAIN_REDIRECT = new String[]{"chain", "redirect-Action", "redirectAction"};
+  private static final String[] RESULT_TYPES_CHAIN_REDIRECT = new String[]{"chain", "redirect-action", "redirectAction"};
 
   /**
    * Is the given result "type" handled by this ReferenceProvider.
@@ -60,7 +60,7 @@ public class ActionChainOrRedirectReferenceProvider implements PathReferenceProv
       return false;
     }
 
-    return Arrays.binarySearch(RESULT_TYPES_CHAIN_REDIRECT, dispatcherType) != -1;
+    return Arrays.binarySearch(RESULT_TYPES_CHAIN_REDIRECT, dispatcherType) >= 0;
   }
 
   public boolean createReferences(@NotNull final PsiElement psiElement,
