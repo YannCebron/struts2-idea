@@ -45,7 +45,7 @@
 
   <!-- INCLUDE =================================================================================================== -->
 
-  <include file="struts-include-me.xml"/>
+  <include file="struts-simple-include.xml"/>
   <!-- non-existing file -->
   <include file="<error>INVALID_VALUE</error>"/>
   <!-- valid struts.xml not in fileset -->
