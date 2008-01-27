@@ -20,11 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.struts2.dom.struts.IncludeFileResolvingConverter;
 import com.intellij.struts2.dom.struts.action.ResultTypeResolvingConverter;
 import com.intellij.struts2.dom.struts.action.StrutsPathReferenceConverter;
-import com.intellij.struts2.dom.struts.impl.IncludeFileResolvingConverterImpl;
-import com.intellij.struts2.dom.struts.impl.InterceptorRefResolveConverterImpl;
-import com.intellij.struts2.dom.struts.impl.ResultTypeResolvingConverterImpl;
-import com.intellij.struts2.dom.struts.impl.StrutsPackageExtendsResolveConverterImpl;
+import com.intellij.struts2.dom.struts.impl.*;
 import com.intellij.struts2.dom.struts.impl.path.StrutsPathReferenceConverterImpl;
+import com.intellij.struts2.dom.struts.strutspackage.DefaultInterceptorRefResolveConverter;
 import com.intellij.struts2.dom.struts.strutspackage.InterceptorRefResolveConverter;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackageExtendsResolveConverter;
 import com.intellij.struts2.dom.validator.config.ValidatorConfigResolveConverter;
@@ -58,18 +56,20 @@ public class StrutsProjectComponent extends AbstractProjectComponent {
   private void registerDomConverters() {
     final ConverterManager converterManager = domManager.getConverterManager();
     converterManager.registerConverterImplementation(StrutsPackageExtendsResolveConverter.class,
-        new StrutsPackageExtendsResolveConverterImpl());
+                                                     new StrutsPackageExtendsResolveConverterImpl());
     converterManager.registerConverterImplementation(IncludeFileResolvingConverter.class,
-        new IncludeFileResolvingConverterImpl());
+                                                     new IncludeFileResolvingConverterImpl());
     converterManager.registerConverterImplementation(ResultTypeResolvingConverter.class,
-        new ResultTypeResolvingConverterImpl());
+                                                     new ResultTypeResolvingConverterImpl());
     converterManager.registerConverterImplementation(InterceptorRefResolveConverter.class,
-        new InterceptorRefResolveConverterImpl());
+                                                     new InterceptorRefResolveConverterImpl());
+    converterManager.registerConverterImplementation(DefaultInterceptorRefResolveConverter.class,
+                                                     new DefaultInterceptorRefResolveConverterImpl());
     converterManager.registerConverterImplementation(StrutsPathReferenceConverter.class,
-        new StrutsPathReferenceConverterImpl());
+                                                     new StrutsPathReferenceConverterImpl());
 
     converterManager.registerConverterImplementation(ValidatorConfigResolveConverter.class,
-        new ValidatorConfigResolveConverterImpl());
+                                                     new ValidatorConfigResolveConverterImpl());
   }
 
   @NotNull
