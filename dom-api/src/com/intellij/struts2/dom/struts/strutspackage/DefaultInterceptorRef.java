@@ -17,7 +17,10 @@ package com.intellij.struts2.dom.struts.strutspackage;
 
 import com.intellij.struts2.dom.Param;
 import com.intellij.struts2.dom.ParamsElement;
-import com.intellij.util.xml.*;
+import com.intellij.util.xml.Convert;
+import com.intellij.util.xml.GenericAttributeValue;
+import com.intellij.util.xml.Required;
+import com.intellij.util.xml.SubTagList;
 
 import java.util.List;
 
@@ -26,9 +29,8 @@ import java.util.List;
  */
 public interface DefaultInterceptorRef extends ParamsElement {
 
-  // only within current package
   @Required
-//  @Scope(StrutsPackageWithinPackageScopeProvider.class)
+  @Convert(DefaultInterceptorRefResolveConverter.class)
   GenericAttributeValue<InterceptorStack> getName();
 
   @SubTagList(value = "param")

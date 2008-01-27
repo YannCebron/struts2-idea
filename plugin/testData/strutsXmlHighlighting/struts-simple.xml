@@ -78,6 +78,7 @@
   <package name="extendingNotInFilesetPackage" extends="<error>notInFilesetPackage</error>"/>
 
 
+  <!-- default-action-ref -->
   <package name="defaultActionRef">
     <default-action-ref name="myDefaultAction"/>
     <action name="myDefaultAction"/>
@@ -87,6 +88,21 @@
     <default-action-ref name="<error>INVALID_VALUE</error>"/>
   </package>
 
+
+  <!-- default-interceptor-ref -->
+  <package name="defaultInterceptorRef">
+    <interceptors>
+      <interceptor-stack name="myLocalInterceptorStack">
+      </interceptor-stack>
+    </interceptors>
+
+    <default-interceptor-ref name="myLocalInterceptorStack"/>
+  </package>
+
+  <package name="defaultInterceptorRefError">
+    <default-interceptor-ref name="<error>INVALID_VALUE</error>"/>
+  </package>
+  
 
   <!-- ACTION =================================================================================================== -->
 
