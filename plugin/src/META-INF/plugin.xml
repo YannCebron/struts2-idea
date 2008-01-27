@@ -18,7 +18,7 @@
   ]]>
   </change-notes>
 
-  <version>0.36</version>
+  <version>0.37</version>
 
   <!-- required dependencies -->
   <depends>com.intellij.javaee</depends>
