@@ -56,4 +56,10 @@ public class ActionReferenceProviderTestCase extends BasicHighlightingTestCase<W
                                      "namespace1Action", "namespace2Action", "myWildCard*");
   }
 
+  public void testActionCompletionVariantsNamespace() throws Throwable {
+    createStrutsFileSet("struts-action.xml");
+    myFixture.testCompletionVariants("/jsp/action-completionvariants_namespace.jsp",
+                                     "myWildCard*");
+  }
+
 }
