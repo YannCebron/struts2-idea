@@ -82,13 +82,13 @@ public class ActionReferenceProvider extends PsiReferenceProviderBase {
     public Object[] getVariants() {
       final List<Action> actionList = strutsModel.getActionsForNamespace(getNamespace());
 
-      final List<Object> variants = new ArrayList<Object>();
+      final List<Object> variants = new ArrayList<Object>(actionList.size());
       for (final Action action : actionList) {
         final String actionPath = action.getName().getStringValue();
         if (actionPath != null) {
           final Object variant =
-            LookupValueFactory.createLookupValueWithHint(actionPath, StrutsIcons.ACTION,
-                                                         action.getNamespace());
+              LookupValueFactory.createLookupValueWithHint(actionPath, StrutsIcons.ACTION,
+                                                           action.getNamespace());
           variants.add(variant);
         }
       }
@@ -96,7 +96,7 @@ public class ActionReferenceProvider extends PsiReferenceProviderBase {
     }
 
     public String getUnresolvedMessagePattern() {
-      return "Cannot resolve Action " + getCanonicalText();
+      return "Cannot resolve action ''" + getCanonicalText() + "''";
     }
 
     @Nullable
