@@ -47,11 +47,11 @@
 
   <include file="struts-simple-include.xml"/>
   <!-- non-existing file -->
-  <include file="<error>INVALID_VALUE</error>"/>
+  <include file="<error descr="Cannot resolve file 'INVALID_VALUE' (not included in file sets?)">INVALID_VALUE</error>"/>
   <!-- valid struts.xml not in fileset -->
-  <include file="<error>struts-notinfileset.xml</error>"/>
+  <include file="<error descr="Cannot resolve file 'struts-notinfileset.xml' (not included in file sets?)">struts-notinfileset.xml</error>"/>
   <!-- self-inclusion is prohibited -->
-  <include file="<error>struts-simple.xml</error>"/>
+  <include file="<error descr="Recursive inclusion of current file">struts-simple.xml</error>"/>
 
 
   <!-- PACKAGE =================================================================================================== -->
