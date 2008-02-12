@@ -4,7 +4,6 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-
 <struts>
 
   <package name="actionChainTest" namespace="/actionChainTest">
@@ -30,6 +29,22 @@
   <package name="actionChainTest2" namespace="/actionChainTest2">
 
     <action name="anotherAction"/>
+
+  </package>
+
+
+  <package name="wildcardActionChainTest" namespace="/actionChainTestWildcards">
+
+    <action name="wildcardPath*">
+      <result name="wildcard" type="chain">wildcardPath</result>
+      <result name="wildcardTest" type="chain">wildcardPathAnything</result>
+
+      <result name="wildcardNotMatch" type="chain"><error>wildcardNotMatchPath</error></result>
+    </action>
+
+    <action name="wild*BetweenPath">
+      <result name="wildcardBetweenTest" type="chain">wildInThereBetweenPath</result>
+    </action>
 
   </package>
 

@@ -69,11 +69,11 @@ class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
     final List<Action> actionResultList = new ArrayList<Action>();
 
     for (final Action action : getActionsForNamespace(namespace)) {
-      if (name.equals(action.getName().getStringValue())) {
+      if (action.matchesPath(name)) {
         actionResultList.add(action);
       }
     }
-    
+
     return actionResultList;
   }
 

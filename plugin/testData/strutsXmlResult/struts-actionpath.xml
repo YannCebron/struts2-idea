@@ -4,7 +4,6 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-
 <struts>
 
   <package name="actionPathTest" namespace="/actionPathTest">
@@ -29,6 +28,26 @@
   <package name="anotherActionPathTest" namespace="/anotherActionPathTest">
 
     <action name="anotherActionPath1"/>
+
+  </package>
+
+
+  <package name="wildcardTest" namespace="/wildcards">
+
+    <action name="wildcard*">
+      <result name="validWildcard">wildcard.action</result>
+      <result name="validWithWildcardValue">wildcardAnythingGoesHere.action</result>
+      <result name="validWithHyphenValue">wildcard-Any-thing-Goes-Here.action</result>
+
+      <result name="invalidCase"><error>wILdcardSomething.action</error></result>
+      <result name="invalidDoesNotMatch"><error>wildcarXXX.action</error></result>
+      <result name="invalidActionExtension"><error>wildcardAnythingGoesHere.INVALID_VALUE</error></result>
+    </action>
+
+    <action name="wild*InBetween">
+      <result name="validInBetween">wildInBetween.action</result>
+      <result name="validInBetweenWithWildcardValue">wildJustInBetween.action</result>
+    </action>
 
   </package>
 
