@@ -116,7 +116,7 @@ final class ActionUtil {
         }
       }
 
-      // return type "java.lang.String"
+      // return type "java.lang.String" or "com.opensymphony.xwork2.Result"
       final PsiType type = psiMethod.getReturnType();
       if (type != null &&
           type instanceof PsiClassType &&
