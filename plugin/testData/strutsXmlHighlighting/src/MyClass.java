@@ -23,6 +23,10 @@ public class MyClass {
     return null;
   }
 
+  public String invalidActionMethodDueTooManyExceptions() throws MyException, IllegalStateException {
+    return null;
+  }
+
   public boolean invalidActionMethodDueToWrongReturnType() throws Exception {
     return false;
   }
