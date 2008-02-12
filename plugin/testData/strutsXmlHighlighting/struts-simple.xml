@@ -128,6 +128,7 @@
     <action name="actionMethod" class="MyClass" method="validActionMethod"/>
     <action name="actionMethodWithException" class="MyClass" method="validActionMethodWithException"/>
     <action name="actionMethodGetterButNoField" class="MyClass" method="getValidActionMethodNoUnderlyingField"/>
+    <action name="actionMethodReturnResult" class="MyClass" method="validActionMethodResult"/>
 
     <action name="nonExistingActionMethod" class="MyClass" method="<error>INVALID_VALUE</error>"/>
     <action name="invalidActionMethodDueToWrongExceptionType" class="MyClass"
