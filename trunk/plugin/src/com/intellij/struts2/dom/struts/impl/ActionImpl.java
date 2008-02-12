@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Adds utility methods.
@@ -37,6 +38,25 @@ import java.util.List;
  * @author Yann CŽbron
  */
 public abstract class ActionImpl implements Action {
+
+  public boolean matchesPath(@NotNull final String path) {
+    final String myPath = getName().getStringValue();
+    if (myPath == null) {
+      return false;
+    }
+
+    // do we have any wildcard-markers in our path? no --> exact compare
+    if (myPath.indexOf("*") == -1 &&
+        myPath.indexOf("**") == -1) {
+      return path.equals(myPath);
+    }
+
+    final String matchString = myPath.replaceAll("\\*", "\\\\S*"); // TODO exclude "/"
+    // TODO replace "**"
+    final boolean match = Pattern.matches(matchString, path);
+
+    return match;
+  }
 
   @NotNull
   public StrutsPackage getStrutsPackage() {
@@ -95,7 +115,7 @@ public abstract class ActionImpl implements Action {
     final PsiElementFactory psiElementFactory = PsiManager.getInstance(project).getElementFactory();
     final GlobalSearchScope projectScope = GlobalSearchScope.allScope(project);
     final PsiClassType stringType = psiElementFactory.createTypeByFQClassName(CommonClassNames.JAVA_LANG_STRING,
-        projectScope);
+                                                                              projectScope);
     final PsiClassType exceptionType = psiElementFactory.createTypeByFQClassName("java.lang.Exception", projectScope);
 
     final List<PsiMethod> actionMethods = new ArrayList<PsiMethod>();

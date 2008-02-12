@@ -66,6 +66,15 @@ public interface Action extends ParamsElement {
   // additional methods -----------------------------------
 
   /**
+   * Does the given path match this action's path (including support for wildcards).
+   *
+   * @param path Path to check.
+   * @return true if yes.
+   */
+  boolean matchesPath(@NotNull final String path);
+
+
+  /**
    * Gets the enclosing package.
    *
    * @return Enclosing package.
