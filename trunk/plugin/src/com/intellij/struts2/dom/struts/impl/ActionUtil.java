@@ -69,6 +69,8 @@ final class ActionUtil {
     final GlobalSearchScope projectScope = GlobalSearchScope.allScope(project);
     final PsiClassType stringType = psiElementFactory.createTypeByFQClassName(CommonClassNames.JAVA_LANG_STRING,
                                                                               projectScope);
+    final PsiClassType resultType = psiElementFactory.createTypeByFQClassName("com.opensymphony.xwork2.Result",
+                                                                              projectScope);
     final PsiClassType exceptionType = psiElementFactory.createTypeByFQClassName("java.lang.Exception", projectScope);
 
     final List<PsiMethod> actionMethods = new ArrayList<PsiMethod>();
@@ -118,7 +120,7 @@ final class ActionUtil {
       final PsiType type = psiMethod.getReturnType();
       if (type != null &&
           type instanceof PsiClassType &&
-          type.equals(stringType)) {
+          (type.equals(stringType) || type.equals(resultType))) {
         actionMethods.add(psiMethod);
       }
 
