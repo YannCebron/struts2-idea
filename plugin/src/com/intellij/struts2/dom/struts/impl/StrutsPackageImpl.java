@@ -16,9 +16,13 @@
 package com.intellij.struts2.dom.struts.impl;
 
 import com.intellij.struts2.dom.struts.strutspackage.DefaultClassRef;
+import com.intellij.struts2.dom.struts.strutspackage.ResultType;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.struts2.structure.LocationPresentation;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * @author Yann CŽbron
@@ -35,6 +39,7 @@ public abstract class StrutsPackageImpl implements StrutsPackage, LocationPresen
     return namespace != null ? namespace : DEFAULT_NAMESPACE;
   }
 
+  @Nullable
   public DefaultClassRef searchDefaultClassRef() {
     StrutsPackage currentPackage = this;
     while (currentPackage != null) {
@@ -43,6 +48,22 @@ public abstract class StrutsPackageImpl implements StrutsPackage, LocationPresen
       }
       currentPackage = currentPackage.getExtends().getValue();
     }
+    return null;
+  }
+
+  @Nullable
+  public ResultType searchDefaultResultType() {
+    StrutsPackage currentPackage = this;
+    while (currentPackage != null) {
+      final List<ResultType> resultTypes = currentPackage.getResultTypes();
+      for (final ResultType resultType : resultTypes) {
+        if (resultType.getDefault().getXmlElement() != null) {
+          return resultType;
+        }
+      }
+      currentPackage = currentPackage.getExtends().getValue();
+    }
+
     return null;
   }
 

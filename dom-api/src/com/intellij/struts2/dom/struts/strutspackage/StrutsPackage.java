@@ -105,6 +105,13 @@ public interface StrutsPackage extends DomElement {
   @Nullable
   DefaultClassRef searchDefaultClassRef();
 
-  // TODO same for the other default-xx stuff
+  /**
+   * Searches the default <code>result-type</code> element for this package, walking up the hierarchy until one is found.
+   *
+   * @return null if no default defined.
+   */
+  @Nullable
+  ResultType searchDefaultResultType();
+
 
 }

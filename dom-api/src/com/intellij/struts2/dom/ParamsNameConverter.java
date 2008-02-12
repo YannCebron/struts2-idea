@@ -145,8 +145,18 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
 
     if (parent instanceof Result) {
       final ResultType resultType = ((Result) parent).getType().getValue();
-      return resultType != null ? resultType.getResultTypeClass().getValue() : null;
-      // TODO default result-type
+      if (resultType != null) {
+        return resultType.getResultTypeClass().getValue();
+      }
+
+      // find default result-type in enclosing package or its parents
+      final StrutsPackage strutsPackage = parent.getParentOfType(StrutsPackage.class, true);
+      if (strutsPackage == null) {
+        return null;
+      }
+
+      final ResultType defaultResultType = strutsPackage.searchDefaultResultType();
+      return defaultResultType != null ? defaultResultType.getResultTypeClass().getValue() : null;
     }
 
     if (parent instanceof GlobalResult) {
