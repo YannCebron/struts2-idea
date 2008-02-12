@@ -44,10 +44,17 @@ public class ActionUtilTest {
     assertTrue(ActionUtil.matchesPath("some*", "someX"));
     assertTrue(ActionUtil.matchesPath("some*", "someThing"));
 
+    // single '*' wildcard, slash --> not allowed
+    assertFalse(ActionUtil.matchesPath("some*", "some/"));
+    assertFalse(ActionUtil.matchesPath("some*", "someT/ing"));
+    assertFalse(ActionUtil.matchesPath("some*", "some/T/ing"));
+
     // two wildcards
     assertTrue(ActionUtil.matchesPath("some*Action*Stuff", "someActionStuff"));
     assertTrue(ActionUtil.matchesPath("some*Action*Stuff", "someXActionXStuff"));
     assertTrue(ActionUtil.matchesPath("some*Action*Stuff", "someXYZActionXYZStuff"));
+
+    assertFalse(ActionUtil.matchesPath("some*Action*Stuff", "some/Action/Stuff"));
   }
 
 
