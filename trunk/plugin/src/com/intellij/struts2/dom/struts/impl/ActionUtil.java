@@ -38,6 +38,8 @@ final class ActionUtil {
 
   /**
    * Does the given path match the Action's path (including support for wildcards).
+   * <p/>
+   * TODO handle '**' wildcards, handle backslash escape
    *
    * @param actionPath Path of Action.
    * @param checkPath  Path to check.
@@ -51,11 +53,8 @@ final class ActionUtil {
       return checkPath.equals(actionPath);
     }
 
-    final String matchString = actionPath.replaceAll("\\*", "\\\\S*"); // TODO exclude "/"
-    // TODO replace "**"
-    final boolean match = Pattern.matches(matchString, checkPath);
-
-    return match;
+    final String matchString = actionPath.replaceAll("\\*", "[^/]*");
+    return Pattern.matches(matchString, checkPath);
   }
 
   /**
