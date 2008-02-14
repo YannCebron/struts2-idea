@@ -116,8 +116,9 @@ public class StrutsApplicationComponent implements ApplicationComponent, Inspect
       return null;
     }
 
-    // IconProvider queries non-physical PSI as well (e.g. completion items)
-    if (!element.isPhysical()) {
+    // IconProvider queries non-physical PSI as well (e.g. completion items); check validity
+    if (!element.isPhysical() ||
+        !element.isValid()) {
       return null;
     }
 
