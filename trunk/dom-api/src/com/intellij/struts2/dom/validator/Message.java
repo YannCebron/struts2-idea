@@ -29,8 +29,6 @@ import com.intellij.util.xml.TagValue;
 @Namespace(StrutsDomConstants.VALIDATOR_NAMESPACE_KEY)
 public interface Message extends DomElement {
 
-//  @Convert(PropertyKeyResolveConverter.class) // TODO
-//  GenericAttributeValue<Property> getKey();
   GenericAttributeValue<String> getKey();
 
   @TagValue
