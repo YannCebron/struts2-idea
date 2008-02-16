@@ -63,16 +63,6 @@ public class Struts2ModelValidator extends ValidatorBase {
       }
     }
 
-    // TODO do not check struts.xml files which are not configured in filesets ?!
-//    final PsiManager psiManager = PsiManager.getInstance(project);
-//    final DomManager domManager = DomManager.getDomManager(project);
-//    for (final VirtualFile file : scope.getFiles(StdFileTypes.XML, false)) {
-//      final Module module = context.getModuleByFile(file);
-//      if (module != null) {
-//        addStrutsConfigFile(files, file, psiManager, domManager);
-//      }
-//    }
-
     return files;
   }
 
