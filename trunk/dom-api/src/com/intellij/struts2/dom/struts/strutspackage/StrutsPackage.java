@@ -46,6 +46,11 @@ public interface StrutsPackage extends DomElement {
   GenericAttributeValue<String> getNamespace();
 
 
+  /**
+   * Gets the defined namespace or {@link #DEFAULT_NAMESPACE} if none defined.
+   *
+   * @return Namespace.
+   */
   @NotNull
   String searchNamespace();
 
