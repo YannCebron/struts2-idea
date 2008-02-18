@@ -14,6 +14,10 @@ public class ActionClass {
     return null;
   }
 
+  public com.opensymphony.xwork2.Result validActionMethodResult() {
+   return null;
+  }
+
   // invalid action-method
   public String getMyField() {
     return myField;

@@ -71,7 +71,8 @@ public class StrutsCompletionTestCase extends BasicStrutsHighlightingTestCase<Ja
     performCompletionVariantTest("struts-completionvariants-action_method.xml",
                                  "validActionMethod",
                                  "validActionMethodWithException",
-                                 "getValidActionMethodNoUnderlyingField");
+                                 "getValidActionMethodNoUnderlyingField",
+                                 "validActionMethodResult");
   }
 
 }
