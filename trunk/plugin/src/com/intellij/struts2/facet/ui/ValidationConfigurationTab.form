@@ -28,7 +28,7 @@
             <properties>
               <enabled value="true"/>
               <text value="Report &amp;errors as warnings"/>
-              <toolTipText value="Don't stop make on detected errors"/>
+              <toolTipText value="Don't stop on errors"/>
             </properties>
           </component>
           <component id="646d8" class="javax.swing.JCheckBox" binding="strutsXmlCheckBox" default-binding="true">
