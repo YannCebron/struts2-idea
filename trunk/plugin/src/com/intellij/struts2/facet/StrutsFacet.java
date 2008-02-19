@@ -67,10 +67,4 @@ public class StrutsFacet extends Facet<StrutsFacetConfiguration> {
     return module != null ? getInstance(module) : null;
   }
 
-/*
-  public WebFacet getWebFacet() {
-    return (WebFacet) getUnderlyingFacet();
-  }
-*/
-
 }

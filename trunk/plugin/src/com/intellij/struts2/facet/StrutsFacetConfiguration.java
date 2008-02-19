@@ -46,7 +46,7 @@ import java.util.Set;
  */
 public class StrutsFacetConfiguration implements FacetConfiguration, ModificationTracker {
 
-  // Filsets
+  // Filesets
   @NonNls
   private static final String FILESET = "fileset";
   @NonNls
