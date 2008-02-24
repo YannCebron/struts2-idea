@@ -69,13 +69,12 @@ class DispatchPathResultContributor implements StrutsResultContributor {
       return true; // XML syntax error
     }
 
-    final String packageNamespace = strutsPackage.searchNamespace();
-
     final WebFacet webFacet = WebUtil.getWebFacet(psiElement);
     if (webFacet == null) {
       return true; // setup error, web-facet must be present in current or dependent module
     }
 
+    final String packageNamespace = strutsPackage.searchNamespace();
     final WebDirectoryUtil directoryUtil = WebDirectoryUtil.getWebDirectoryUtil(psiElement.getProject());
 
     set.addCustomization(
@@ -105,6 +104,7 @@ class DispatchPathResultContributor implements StrutsResultContributor {
             return basePathRoots;
           }
         });
+    
     Collections.addAll(references, set.getAllReferences());
     return false;
   }
