@@ -45,9 +45,7 @@ public class StrutsPathReferenceConverterImpl extends StrutsPathReferenceConvert
    * @see com.intellij.struts2.StrutsProjectComponent#initComponent()
    */
   public static void addResultContributors(final StrutsResultContributor[] contributors) {
-    for (final StrutsResultContributor contributor : contributors) {
-      MY_RESULT_CONTRIBUTORS = ArrayUtil.append(MY_RESULT_CONTRIBUTORS, contributor);
-    }
+    MY_RESULT_CONTRIBUTORS = ArrayUtil.mergeArrays(MY_RESULT_CONTRIBUTORS, contributors, StrutsResultContributor.class);
   }
 
   public PathReference fromString(@Nullable final String value, final ConvertContext context) {
