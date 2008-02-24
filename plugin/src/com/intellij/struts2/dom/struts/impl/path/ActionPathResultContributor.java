@@ -17,7 +17,6 @@ package com.intellij.struts2.dom.struts.impl.path;
 
 import com.intellij.codeInsight.lookup.LookupItem;
 import com.intellij.openapi.paths.PathReference;
-import com.intellij.openapi.paths.PathReferenceProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
@@ -42,7 +41,7 @@ import java.util.List;
  *
  * @author Yann CŽbron
  */
-class ActionPathReferenceProvider implements PathReferenceProvider {
+class ActionPathResultContributor implements StrutsResultContributor {
 
   public boolean createReferences(@NotNull final PsiElement psiElement,
                                   @NotNull final List<PsiReference> references,
@@ -70,7 +69,7 @@ class ActionPathReferenceProvider implements PathReferenceProvider {
 
     // skip "chain" results
     final String dispatcherType = resultTag.getAttributeValue("type");
-    if (ActionChainOrRedirectReferenceProvider.isActionChainOrRedirectResult(dispatcherType)) {
+    if (ActionChainOrRedirectResultContributor.isActionChainOrRedirectResult(dispatcherType)) {
       return false;
     }
 

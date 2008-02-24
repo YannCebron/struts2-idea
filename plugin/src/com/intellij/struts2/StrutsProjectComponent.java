@@ -16,12 +16,15 @@
 package com.intellij.struts2;
 
 import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupManager;
 import com.intellij.struts2.dom.struts.IncludeFileResolvingConverter;
 import com.intellij.struts2.dom.struts.action.ResultTypeResolvingConverter;
 import com.intellij.struts2.dom.struts.action.StrutsPathReferenceConverter;
 import com.intellij.struts2.dom.struts.impl.*;
 import com.intellij.struts2.dom.struts.impl.path.StrutsPathReferenceConverterImpl;
+import com.intellij.struts2.dom.struts.impl.path.StrutsResultContributor;
 import com.intellij.struts2.dom.struts.strutspackage.DefaultInterceptorRefResolveConverter;
 import com.intellij.struts2.dom.struts.strutspackage.InterceptorRefResolveConverter;
 import com.intellij.struts2.dom.struts.strutspackage.StrutsPackageExtendsResolveConverter;
@@ -50,7 +53,21 @@ public class StrutsProjectComponent extends AbstractProjectComponent {
   }
 
   public void initComponent() {
+    addStrutsResultContributors();
     registerDomConverters();
+  }
+
+  /**
+   * Queries all registered extension points for {@link com.intellij.struts2.dom.struts.impl.path.StrutsResultContributor}.
+   */
+  private void addStrutsResultContributors() {
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(new Runnable() {
+
+      public void run() {
+        final StrutsResultContributor[] strutsResultContributors = Extensions.getExtensions(StrutsResultContributor.EP_NAME);
+        StrutsPathReferenceConverterImpl.addResultContributors(strutsResultContributors);
+      }
+    });
   }
 
   private void registerDomConverters() {

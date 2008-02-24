@@ -58,7 +58,7 @@ public class StrutsResultResolvingTestCase extends BasicStrutsHighlightingTestCa
   }
 
   /**
-   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectReferenceProvider}
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectResultContributor}
    *
    * @throws Throwable On errors.
    */
@@ -67,7 +67,7 @@ public class StrutsResultResolvingTestCase extends BasicStrutsHighlightingTestCa
   }
 
   /**
-   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectReferenceProvider}
+   * {@link com.intellij.struts2.dom.struts.impl.path.ActionChainOrRedirectResultContributor}
    *
    * @throws Throwable On errors.
    */

@@ -19,7 +19,6 @@ import com.intellij.javaee.web.WebRoot;
 import com.intellij.javaee.web.WebUtil;
 import com.intellij.javaee.web.facet.WebFacet;
 import com.intellij.openapi.paths.PathReference;
-import com.intellij.openapi.paths.PathReferenceProvider;
 import com.intellij.openapi.util.Iconable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -48,7 +47,7 @@ import java.util.List;
  *
  * @author Yann CŽbron
  */
-class DispatchPathReferenceProvider implements PathReferenceProvider {
+class DispatchPathResultContributor implements StrutsResultContributor {
 
   public boolean createReferences(@NotNull final PsiElement psiElement,
                                   @NotNull final List<PsiReference> references,

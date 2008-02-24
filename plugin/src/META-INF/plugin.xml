@@ -32,6 +32,10 @@
 
   <idea-version since-build="7590" until-build="7999"/>
 
+  <extensionPoints>
+    <extensionPoint name="resultContributor" interface="com.intellij.struts2.dom.struts.impl.path.StrutsResultContributor"/>
+  </extensionPoints>
+
   <extensions xmlns="com.intellij">
     <errorHandler implementation="nu.studer.idea.errorreporting.PluginErrorReportSubmitter"/>
 
