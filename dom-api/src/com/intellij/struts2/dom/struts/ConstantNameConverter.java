@@ -64,6 +64,8 @@ public class ConstantNameConverter extends ResolvingConverter.StringConverter {
                   "struts.custom.i18n.resources",
                   "struts.dispatcher.parametersWorkaround",
                   "struts.freemarker.manager.classname",
+                  "struts.freemarker.templatesCache",
+                  "struts.freemarker.beanwrapperCache",
                   "struts.freemarker.wrapper.altMap",
                   "struts.xslt.nocache",
                   "struts.configuration.files",
