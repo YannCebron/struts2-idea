@@ -15,9 +15,19 @@
 
 package com.intellij.struts2.dom.inspection;
 
+import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.struts2.dom.struts.StrutsRoot;
+import com.intellij.struts2.dom.struts.action.ActionClassConverter;
+import com.intellij.util.xml.DomElement;
+import com.intellij.util.xml.GenericAttributeValue;
 import com.intellij.util.xml.GenericDomValue;
 import com.intellij.util.xml.highlighting.BasicDomElementsInspection;
+import com.intellij.util.xml.highlighting.DomElementAnnotationHolder;
+import com.intellij.util.xml.highlighting.DomHighlightingHelper;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,10 +42,43 @@ public class Struts2ModelInspection extends BasicDomElementsInspection<StrutsRoo
     super(StrutsRoot.class);
   }
 
-  // TODO hack for suppresing wildcard-resolving
   protected boolean shouldCheckResolveProblems(final GenericDomValue value) {
+    // we roll our own checking for <action> class in checkDomElement()
+    if (value.getConverter() instanceof ActionClassConverter) {
+      return false;
+    }
+
+    // TODO hack for suppresing wildcard-resolving
     final String stringValue = value.getStringValue();
     return stringValue == null || stringValue.indexOf('{') < 0;
+  }
+
+  protected void checkDomElement(final DomElement element,
+                                 final DomElementAnnotationHolder holder,
+                                 final DomHighlightingHelper helper) {
+    super.checkDomElement(element, holder, helper);
+
+    if (element instanceof GenericAttributeValue) {
+      final GenericAttributeValue genericDomValue = (GenericAttributeValue) element;
+      if (genericDomValue.getConverter() instanceof ActionClassConverter) {
+        final PsiReference[] psiReferences = genericDomValue.getUserData(ActionClassConverter.REFERENCES_KEY);
+        assert psiReferences != null : "REFERENCES_KEY not stored for " + genericDomValue;
+
+        for (final PsiReference psiReference : psiReferences) {
+          final PsiElement resolveElement = psiReference.resolve();
+          if (resolveElement != null &&
+              resolveElement instanceof PsiClass) {
+            return;
+          }
+        }
+
+        final String referenceTypes = StringUtil.join(genericDomValue.getUserData(ActionClassConverter.REFERENCES_TYPES),
+                                                      "|");
+        holder.createProblem(genericDomValue,
+                             HighlightSeverity.ERROR,
+                             "Cannot resolve " + referenceTypes + " '" + genericDomValue.getStringValue() + "'");
+      }
+    }
   }
 
   @NotNull

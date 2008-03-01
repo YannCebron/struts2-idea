@@ -24,6 +24,7 @@
 
   <!-- optional dependencies -->
   <depends optional="true" config-file="struts2-javascript.xml">JavaScript</depends>
+  <depends optional="true" config-file="struts2-spring.xml">com.intellij.spring</depends>
 
   <vendor email="yann.cebron@googlemail.com"
           url="http://www.lineas.de/lineas-informationstechnik/"
@@ -32,8 +33,12 @@
 
   <idea-version since-build="7590" until-build="7999"/>
 
+  <!-- published extension points -->
   <extensionPoints>
-    <extensionPoint name="resultContributor" interface="com.intellij.struts2.dom.struts.impl.path.StrutsResultContributor"/>
+    <extensionPoint name="resultContributor"
+                    interface="com.intellij.struts2.dom.struts.impl.path.StrutsResultContributor"/>
+    <extensionPoint name="actionClassContributor"
+                    interface="com.intellij.struts2.dom.struts.action.ActionClassConverter$ActionClassConverterContributor"/>
   </extensionPoints>
 
   <extensions xmlns="com.intellij">
@@ -51,7 +56,7 @@
     <gotoSymbolContributor implementation="com.intellij.struts2.gotosymbol.GoToPackageSymbolProvider"/>
 
     <xmlStructureViewBuilderProvider
-      implementation="com.intellij.struts2.structure.StrutsStructureViewBuilderProvider"/>
+        implementation="com.intellij.struts2.structure.StrutsStructureViewBuilderProvider"/>
 
 
     <!-- validation.xml/validator-config.xml -->
@@ -64,9 +69,9 @@
     <dom.fileDescription implementation="com.intellij.struts2.dom.validator.ValidatorConfigDomFileDescription"/>
 
     <xmlStructureViewBuilderProvider
-      implementation="com.intellij.struts2.structure.ValidationStructureViewBuilderProvider"/>
+        implementation="com.intellij.struts2.structure.ValidationStructureViewBuilderProvider"/>
 
-    
+
     <!-- JAVA -->
     <annotator language="JAVA" annotatorClass="com.intellij.struts2.annotators.ActionAnnotator"/>
 

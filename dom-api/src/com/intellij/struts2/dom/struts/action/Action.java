@@ -41,9 +41,8 @@ public interface Action extends ParamsElement {
   GenericAttributeValue<String> getName();
 
   @Attribute(value = "class")
-  @ExtendClass(allowAbstract = false, allowInterface = false)
+  @Convert(ActionClassConverter.class)
   GenericAttributeValue<PsiClass> getActionClass();
-
 
   @Attribute(value = "method")
   @Convert(ActionMethodConverter.class)

@@ -20,6 +20,7 @@ import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
 import com.intellij.struts2.dom.struts.IncludeFileResolvingConverter;
+import com.intellij.struts2.dom.struts.action.ActionClassConverter;
 import com.intellij.struts2.dom.struts.action.ResultTypeResolvingConverter;
 import com.intellij.struts2.dom.struts.action.StrutsPathReferenceConverter;
 import com.intellij.struts2.dom.struts.impl.*;
@@ -54,6 +55,7 @@ public class StrutsProjectComponent extends AbstractProjectComponent {
 
   public void initComponent() {
     addStrutsResultContributors();
+    addActionClassConverters();
     registerDomConverters();
   }
 
@@ -70,8 +72,24 @@ public class StrutsProjectComponent extends AbstractProjectComponent {
     });
   }
 
+  /**
+   * Adds all registered extension points for &lt;action&gt; "class" resolvers.
+   */
+  private void addActionClassConverters() {
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(new Runnable() {
+
+      public void run() {
+        final ActionClassConverter.ActionClassConverterContributor[] actionClassConverterContributors =
+            Extensions.getExtensions(ActionClassConverter.EP_NAME);
+        ActionClassConverterImpl.addAdditionalContributors(actionClassConverterContributors);
+      }
+    });
+  }
+
   private void registerDomConverters() {
     final ConverterManager converterManager = domManager.getConverterManager();
+    converterManager.registerConverterImplementation(ActionClassConverter.class,
+                                                     new ActionClassConverterImpl());
     converterManager.registerConverterImplementation(StrutsPackageExtendsResolveConverter.class,
                                                      new StrutsPackageExtendsResolveConverterImpl());
     converterManager.registerConverterImplementation(IncludeFileResolvingConverter.class,
