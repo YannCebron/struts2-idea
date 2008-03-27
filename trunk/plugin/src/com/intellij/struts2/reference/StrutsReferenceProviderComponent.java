@@ -123,7 +123,7 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
     // elements with "action"
     registerTags(ACTION_REFERENCE_PROVIDER,
                  "action", NAMESPACE_TAGLIB_STRUTS_UI,
-                 "form", "url");
+                 "form", "submit", "url");
 
     registerTags(ACTION_REFERENCE_PROVIDER,
                  "name", NAMESPACE_TAGLIB_STRUTS_UI,
@@ -190,7 +190,7 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
                  "set");
 
     // <submit>
-    registerTags(new StaticStringValuesReferenceProvider(false, "input", "button", "image"),
+    registerTags(new StaticStringValuesReferenceProvider(false, "input", "button", "image", "submit"),
                  "type", NAMESPACE_TAGLIB_STRUTS_UI,
                  "submit");
 
