@@ -73,9 +73,9 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
     }
 
     final PsiField field = PropertyUtil.findPropertyField(resolvedValue.getProject(),
-        resolvedValue.getContainingClass(),
-        PropertyUtil.getPropertyName(resolvedValue),
-        false);
+                                                          resolvedValue.getContainingClass(),
+                                                          PropertyUtil.getPropertyNameBySetter(resolvedValue),
+                                                          false);
     return field != null ? field : resolvedValue;
   }
 
@@ -86,7 +86,7 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
 
     final Collection<? extends PsiMethod> variants = getVariants(context);
     for (final PsiMethod variant : variants) {
-      if (name.equals(PropertyUtil.getPropertyName(variant))) {
+      if (name.equals(PropertyUtil.getPropertyNameBySetter(variant))) {
         return variant;
       }
     }
@@ -94,7 +94,7 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
   }
 
   public String toString(@Nullable final PsiMethod field, final ConvertContext context) {
-    return field != null ? PropertyUtil.getPropertyName(field) : null;
+    return field != null ? PropertyUtil.getPropertyNameBySetter(field) : null;
   }
 
   public String getErrorMessage(@Nullable final String s, final ConvertContext context) {
@@ -115,10 +115,13 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
 
     final GenericAttributeValue element = (GenericAttributeValue) context.getInvocationElement();
 
-    return new LocalQuickFix[]{new CreateFieldOrPropertyFix(psiClass,
-        element.getStringValue(),
-        PsiType.getJavaLangString(context.getPsiManager(), GlobalSearchScope.moduleScope(context.getModule())),
-        PropertyMemberType.FIELD, PsiAnnotation.EMPTY_ARRAY)};
+    return new LocalQuickFix[]{
+        new CreateFieldOrPropertyFix(psiClass,
+                                     element.getStringValue(),
+                                     PsiType.getJavaLangString(context.getPsiManager(),
+                                                               GlobalSearchScope.moduleScope(
+                                                                   context.getModule())),
+                                     PropertyMemberType.FIELD, PsiAnnotation.EMPTY_ARRAY)};
   }
 
   @Nullable
@@ -223,7 +226,7 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
     final Set<PsiMethod> propertySetters = new HashSet<PsiMethod>();
     for (final PsiMethod psiMethod : allMethods) {
       if (!psiMethod.hasModifierProperty(PsiModifier.STATIC) &&
-          PropertyUtil.isSimplePropertySetter(psiMethod)) {
+          isSimplePropertySetter(psiMethod)) {
         propertySetters.add(psiMethod);
       }
     }
@@ -241,6 +244,24 @@ public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
     final DomElement current = context.getInvocationElement();
     final DomElement parent = current.getParent();
     return parent != null ? parent.getParent() : null;
+  }
+
+  @SuppressWarnings("HardCodedStringLiteral")
+  public static boolean isSimplePropertySetter(final PsiMethod method) {
+    if (method == null) return false;
+
+    if (method.isConstructor()) return false;
+
+    final String methodName = method.getName();
+
+    if (!(methodName.startsWith("set") && methodName.length() > "set".length())) return false;
+    if (Character.isLowerCase(methodName.charAt("set".length()))) return false;
+
+    if (method.getParameterList().getParametersCount() != 1) {
+      return false;
+    }
+
+    return true;
   }
 
 }
