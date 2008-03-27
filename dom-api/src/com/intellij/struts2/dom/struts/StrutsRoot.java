@@ -15,11 +15,11 @@
 
 package com.intellij.struts2.dom.struts;
 
+import com.intellij.struts2.dom.StrutsDomConstants;
+import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.Namespace;
 import com.intellij.util.xml.SubTagList;
-import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
-import com.intellij.struts2.dom.StrutsDomConstants;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +35,9 @@ public interface StrutsRoot extends DomElement {
 
   @NonNls
   String TAG_NAME = "struts";
+
+  @NonNls
+  String XWORK_TAG_NAME = "xwork";
 
   @SubTagList(value = "package")
   @NotNull
