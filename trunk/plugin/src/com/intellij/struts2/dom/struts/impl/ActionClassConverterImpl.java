@@ -95,7 +95,7 @@ public class ActionClassConverterImpl extends ActionClassConverter {
     PsiReference[] javaClassReferences = javaClassReferenceProvider.getReferencesByElement(element);
 
 
-    String[] referenceTypes = new String[]{"class"};
+    @NonNls String[] referenceTypes = new String[]{"class"};
     
     // 2. additional resolvers (currently Spring only)
     for (final ActionClassConverterContributor actionClassConverterContributor : ADDITIONAL_CONTRIBUTORS) {
@@ -106,7 +106,6 @@ public class ActionClassConverterImpl extends ActionClassConverter {
       }
     }
 
-    psiClassGenericDomValue.putUserData(REFERENCES_KEY, javaClassReferences);
     psiClassGenericDomValue.putUserData(REFERENCES_TYPES, referenceTypes);
     return javaClassReferences;
   }
