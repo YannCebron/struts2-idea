@@ -61,8 +61,8 @@ public abstract class BasicHighlightingTestCase<T extends JavaModuleFixtureBuild
   protected void setUp() throws Exception {
     super.setUp();
 
-    final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder = IdeaTestFixtureFactory.getFixtureFactory()
-        .createFixtureBuilder();
+    final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder =
+            IdeaTestFixtureFactory.getFixtureFactory().createFixtureBuilder();
     final T moduleBuilder = projectBuilder.addModule(getModuleFixtureBuilderClass());
     myFixture = IdeaTestFixtureFactory.getFixtureFactory().createCodeInsightFixture(projectBuilder.getFixture());
 
@@ -82,6 +82,7 @@ public abstract class BasicHighlightingTestCase<T extends JavaModuleFixtureBuild
   protected void configureModule(final T moduleBuilder) throws Exception {
     moduleBuilder.addContentRoot(myFixture.getTempDirPath());
     moduleBuilder.addSourceRoot("src");
+    addStrutsJars(moduleBuilder);
   }
 
   /**
@@ -91,22 +92,28 @@ public abstract class BasicHighlightingTestCase<T extends JavaModuleFixtureBuild
    * @throws Exception On internal errors.
    */
   protected final void addStrutsJars(final T moduleBuilder) throws Exception {
+    addLibrary(moduleBuilder, "struts2",
+               "struts2-core-2.1.0.jar",
+               "freemarker-2.3.10.jar",
+               "ognl-2.6.11.jar",
+               "xwork-2.1.0.jar");
+  }
+
+  protected void addLibrary(final T moduleBuilder, final String libraryName, final String... jarPaths) {
     final File testDataBasePathFile = new File(getTestDataBasePath()); // little hack to get absolute path..
-    moduleBuilder.addLibraryJars("struts-2",
+    moduleBuilder.addLibraryJars(libraryName,
                                  testDataBasePathFile.getAbsolutePath(),
-                                 "struts2-core-2.1.0.jar",
-                                 "freemarker-2.3.10.jar",
-                                 "ognl-2.6.11.jar",
-                                 "xwork-2.1.0.jar");
+                                 jarPaths);
   }
 
   protected final StrutsFacet createFacet() {
     final RunResult<StrutsFacet> runResult = new WriteCommandAction<StrutsFacet>(myProject) {
       protected void run(final Result<StrutsFacet> result) throws Throwable {
         final ModifiableFacetModel model = FacetManager.getInstance(myModule).createModifiableModel();
-        final StrutsFacet facet = StrutsFacetType.INSTANCE
-            .createFacet(myModule, StrutsFacetType.INSTANCE.getPresentableName(),
-                         StrutsFacetType.INSTANCE.createDefaultConfiguration(), null);
+        final StrutsFacet facet = StrutsFacetType.INSTANCE.createFacet(myModule,
+                                                                       StrutsFacetType.INSTANCE.getPresentableName(),
+                                                                       StrutsFacetType.INSTANCE.createDefaultConfiguration(),
+                                                                       null);
         result.setResult(facet);
         model.addFacet(facet);
         model.commit();
