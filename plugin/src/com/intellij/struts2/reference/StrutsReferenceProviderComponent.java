@@ -16,10 +16,14 @@
 package com.intellij.struts2.reference;
 
 import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.paths.PathReferenceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.css.impl.util.CssInHtmlClassOrIdReferenceProvider;
 import com.intellij.psi.filters.position.NamespaceFilter;
 import com.intellij.psi.impl.source.resolve.reference.PsiReferenceProvider;
+import com.intellij.psi.impl.source.resolve.reference.PsiReferenceProviderBase;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.struts2.dom.struts.impl.path.StrutsPathReferenceConverterImpl;
 import static com.intellij.struts2.reference.ReferenceFilters.NAMESPACE_STRUTS_XML;
@@ -28,6 +32,7 @@ import com.intellij.struts2.reference.jsp.ActionReferenceProvider;
 import com.intellij.struts2.reference.jsp.NamespaceReferenceProvider;
 import com.intellij.struts2.reference.jsp.ThemeReferenceProvider;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Registers all {@link com.intellij.psi.impl.source.resolve.reference.PsiReferenceProvider}s.
@@ -66,6 +71,13 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
       new StaticStringValuesReferenceProvider(false, "false", "true");
 
   private static final ActionReferenceProvider ACTION_REFERENCE_PROVIDER = new ActionReferenceProvider();
+
+  private static final PsiReferenceProvider RELATIVE_PATH_PROVIDER = new PsiReferenceProviderBase() {
+    @NotNull
+    public PsiReference[] getReferencesByElement(@NotNull final PsiElement element) {
+      return PathReferenceManager.getInstance().createReferences(element, false, false, true);
+    }
+  };
 
   protected StrutsReferenceProviderComponent(final Project project) {
     super(project);
@@ -128,6 +140,11 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
     registerTags(ACTION_REFERENCE_PROVIDER,
                  "name", NAMESPACE_TAGLIB_STRUTS_UI,
                  "action");
+
+    // elements with "value" (relative path)
+    registerTags(RELATIVE_PATH_PROVIDER,
+                 "value", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "include", "url");
 
     // elements with "namespace"
     registerTags(new NamespaceReferenceProvider(),
@@ -192,6 +209,10 @@ public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
     // <submit>
     registerTags(new StaticStringValuesReferenceProvider(false, "input", "button", "image", "submit"),
                  "type", NAMESPACE_TAGLIB_STRUTS_UI,
+                 "submit");
+
+    registerTags(RELATIVE_PATH_PROVIDER,
+                 "src", NAMESPACE_TAGLIB_STRUTS_UI,
                  "submit");
 
     // <table>
