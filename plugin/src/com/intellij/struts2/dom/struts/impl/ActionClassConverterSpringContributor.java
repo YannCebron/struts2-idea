@@ -28,7 +28,6 @@ import com.intellij.psi.impl.source.resolve.reference.PsiReferenceProviderBase;
 import com.intellij.psi.xml.XmlAttributeValue;
 import com.intellij.spring.SpringManager;
 import com.intellij.spring.SpringModel;
-import com.intellij.spring.model.SpringUtils;
 import com.intellij.spring.model.xml.beans.SpringBeanPointer;
 import com.intellij.struts2.dom.struts.action.ActionClassConverter;
 import com.intellij.util.xml.ConvertContext;
@@ -83,7 +82,7 @@ public class ActionClassConverterSpringContributor extends PsiReferenceProviderB
       }
 
       final String beanName = myElement.getValue();
-      final SpringBeanPointer springBean = SpringUtils.findBeanByReferenceName(model, beanName);
+      final SpringBeanPointer springBean = model.findBean(beanName);
 
       return springBean == null ? null : springBean.getBeanClass();
     }
