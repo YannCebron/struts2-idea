@@ -58,9 +58,20 @@ public class StrutsFacetConfiguration implements FacetConfiguration, Modificatio
   @NonNls
   private static final String FILE = "file";
 
-  // Features
+  // Validation
+
+  /**
+   * Only for backwards compatibility with settings stored in previous versions.
+   * <p/>
+   * TODO remove sometime
+   *
+   * @deprecated use {@link #VALIDATION}
+   */
   @NonNls
-  private static final String FEATURES = "features";
+  private static final String VALIDATION_OLD = "features";
+
+  @NonNls
+  private static final String VALIDATION = "validation";
 
   @NonNls
   private static final String ERRORS_AS_WARNING = "errors_as_warnings";
@@ -71,11 +82,14 @@ public class StrutsFacetConfiguration implements FacetConfiguration, Modificatio
   @NonNls
   private static final String VALIDATE_VALIDATION = "validate_validation";
 
-  // FileSetConfigurationTab
+  /**
+   * Settings for {@link com.intellij.struts2.facet.ui.FileSetConfigurationTab}.
+   */
   private final Set<StrutsFileSet> myFileSets = new LinkedHashSet<StrutsFileSet>();
 
-
-  // FeaturesConfigurationTab
+  /**
+   * Settings for {@link com.intellij.struts2.facet.ui.ValidationConfigurationTab}.
+   */
   private final StrutsValidationConfiguration validationConfiguration = new StrutsValidationConfiguration();
 
   private long myModificationCount;
@@ -89,22 +103,22 @@ public class StrutsFacetConfiguration implements FacetConfiguration, Modificatio
     return myFileSets;
   }
 
-  public StrutsValidationConfiguration getFeaturesConfiguration() {
+  public StrutsValidationConfiguration getValidationConfiguration() {
     return validationConfiguration;
   }
 
   public FacetEditorTab[] createEditorTabs(final FacetEditorContext editorContext,
                                            final FacetValidatorsManager validatorsManager) {
     final FacetLibrariesValidator validator =
-      FacetEditorsFactory.getInstance().createLibrariesValidator(LibraryInfo.EMPTY_ARRAY,
-                                                                 new FacetLibrariesValidatorDescription("struts2"),
-                                                                 editorContext,
-                                                                 validatorsManager);
+        FacetEditorsFactory.getInstance().createLibrariesValidator(LibraryInfo.EMPTY_ARRAY,
+                                                                   new FacetLibrariesValidatorDescription("struts2"),
+                                                                   editorContext,
+                                                                   validatorsManager);
     validatorsManager.registerValidator(validator);
 
     return new FacetEditorTab[]{new FileSetConfigurationTab(this, editorContext),
-                                new FeaturesConfigurationTab(editorContext, validator),
-                                new ValidationConfigurationTab(validator, validationConfiguration)};
+        new FeaturesConfigurationTab(editorContext, validator),
+        new ValidationConfigurationTab(validator, validationConfiguration)};
   }
 
   public void readExternal(final Element element) throws InvalidDataException {
@@ -124,7 +138,8 @@ public class StrutsFacetConfiguration implements FacetConfiguration, Modificatio
       }
     }
 
-    final Element features = element.getChild(FEATURES);
+    final Element features = element.getChild(VALIDATION) != null ?
+        element.getChild(VALIDATION) : element.getChild(VALIDATION_OLD);
     validationConfiguration.setReportErrorsAsWarning(Boolean.valueOf(features.getChild(ERRORS_AS_WARNING).getText()));
     validationConfiguration.setValidateStruts(Boolean.valueOf(features.getChild(VALIDATE_STRUTS).getText()));
     validationConfiguration.setValidateValidation(Boolean.valueOf(features.getChild(VALIDATE_VALIDATION).getText()));
@@ -145,21 +160,21 @@ public class StrutsFacetConfiguration implements FacetConfiguration, Modificatio
       }
     }
 
-    final Element features = new Element(FEATURES);
+    final Element validation = new Element(VALIDATION);
 
     final Element errorsAsWarnings = new Element(ERRORS_AS_WARNING);
     errorsAsWarnings.setText(Boolean.toString(validationConfiguration.isReportErrorsAsWarning()));
-    features.addContent(errorsAsWarnings);
+    validation.addContent(errorsAsWarnings);
 
     final Element validateStruts = new Element(VALIDATE_STRUTS);
     validateStruts.setText(Boolean.toString(validationConfiguration.isValidateStruts()));
-    features.addContent(validateStruts);
+    validation.addContent(validateStruts);
 
     final Element validateValidation = new Element(VALIDATE_VALIDATION);
     validateValidation.setText(Boolean.toString(validationConfiguration.isValidateValidation()));
-    features.addContent(validateValidation);
+    validation.addContent(validateValidation);
 
-    element.addContent(features);
+    element.addContent(validation);
   }
 
   public long getModificationCount() {
