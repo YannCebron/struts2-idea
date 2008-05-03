@@ -19,6 +19,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.ReadonlyStatusHandler;
 import com.intellij.pom.Navigatable;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElementFactory;
@@ -88,7 +89,6 @@ public class ActionMethodConverter extends ResolvingConverter<PsiMethod> {
    * Gets the enclosing <code>action</code>-element for the current context.
    *
    * @param context Current context.
-   *
    * @return Action-element.
    */
   @NotNull
@@ -122,11 +122,16 @@ public class ActionMethodConverter extends ResolvingConverter<PsiMethod> {
 
     public void applyFix(@NotNull final Project project, @NotNull final ProblemDescriptor descriptor) {
       try {
+        if (ReadonlyStatusHandler.getInstance(project).ensureFilesWritable(
+            actionClass.getContainingFile().getVirtualFile()).hasReadonlyFiles()) {
+          return;
+        }
+
         final PsiElementFactory elementFactory = PsiManager.getInstance(project).getElementFactory();
 
-        // TODO use file template
         PsiMethod actionMethod = elementFactory.createMethodFromText(
-          "public java.lang.String " + methodName + "() throws java.lang.Exception { return \"success\"; }", actionClass);
+            "public java.lang.String " + methodName + "() throws java.lang.Exception { return \"success\"; }",
+            actionClass);
 
         final CodeStyleManager codestylemanager = CodeStyleManager.getInstance(project);
         actionMethod = (PsiMethod) codestylemanager.shortenClassReferences(actionMethod);
