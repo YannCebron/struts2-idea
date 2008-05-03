@@ -19,6 +19,7 @@ import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
 import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -41,7 +42,7 @@ public class ValidatorModelValidator extends ValidatorBase {
 
   public ValidatorModelValidator() {
     super("Validator Model Validator", "Validating validator model...",
-        ValidatorModelInspection.class, ValidatorConfigModelInspection.class);
+          ValidatorModelInspection.class, ValidatorConfigModelInspection.class);
   }
 
   protected boolean isValidationEnabledForModel(final StrutsValidationConfiguration validationConfiguration) {
@@ -59,7 +60,11 @@ public class ValidatorModelValidator extends ValidatorBase {
         final PsiFile psiFile = psiManager.findFile(file);
         if (psiFile instanceof XmlFile &&
             validatorManager.isValidationConfigFile((XmlFile) psiFile)) {
-          files.add(file);
+          final Module module = ModuleUtil.findModuleForFile(file, project);
+          if (module != null &&
+              StrutsFacet.getInstance(module) != null) {
+            files.add(file);
+          }
         }
       }
     }
