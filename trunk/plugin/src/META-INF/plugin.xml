@@ -7,7 +7,7 @@
   <name>Struts 2</name>
   <description>
     <![CDATA[
-  Provides full integration of <a href="http://struts.apache.org/2.x/index.html">Struts 2</a>.
+  Provides full integration of <a href="http://struts.apache.org/2.x/index.html">Apache Struts 2</a>.
   ]]>
   </description>
 
@@ -17,7 +17,7 @@
   ]]>
   </change-notes>
 
-  <version>0.39</version>
+  <version>0.40</version>
 
   <!-- required dependencies -->
   <depends>com.intellij.javaee</depends>
