@@ -77,7 +77,7 @@ class ActionPathResultContributor implements StrutsResultContributor {
 
     final String actionExtension = ".action";   // TODO determine extension, property struts.action.extension
 
-    final PsiReference actionReference = new PsiReferenceBase<PsiElement>(psiElement) {
+    final PsiReference actionReference = new PsiReferenceBase<PsiElement>(psiElement, soft) {
 
       public PsiElement resolve() {
         final XmlTagValue tagValue = ((XmlTag) psiElement).getValue();
