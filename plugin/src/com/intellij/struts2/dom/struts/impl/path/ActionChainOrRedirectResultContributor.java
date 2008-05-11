@@ -93,7 +93,7 @@ class ActionChainOrRedirectResultContributor implements StrutsResultContributor 
     }
     final String currentPackage = strutsPackage.searchNamespace();
 
-    final PsiReference chainReference = new PsiReferenceBase<PsiElement>(psiElement) {
+    final PsiReference chainReference = new PsiReferenceBase<PsiElement>(psiElement, soft) {
 
       public PsiElement resolve() {
         final XmlTagValue tagValue = ((XmlTag) psiElement).getValue();
