@@ -25,8 +25,10 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.xml.XmlElement;
 import com.intellij.psi.xml.XmlFile;
 import com.intellij.struts2.dom.struts.StrutsRoot;
+import com.intellij.struts2.dom.struts.action.Action;
 import com.intellij.struts2.dom.struts.action.ActionClassConverter;
 import com.intellij.struts2.dom.struts.model.StrutsManager;
+import com.intellij.struts2.dom.struts.strutspackage.StrutsPackage;
 import com.intellij.struts2.facet.configuration.StrutsFileSet;
 import com.intellij.util.xml.*;
 import com.intellij.util.xml.highlighting.BasicDomElementsInspection;
@@ -46,6 +48,22 @@ public class Struts2ModelInspection extends BasicDomElementsInspection<StrutsRoo
 
   public Struts2ModelInspection() {
     super(StrutsRoot.class);
+  }
+
+  @NotNull
+  public String getGroupDisplayName() {
+    return "Struts 2";
+  }
+
+  @NotNull
+  public String getDisplayName() {
+    return "Struts 2 Model Inspection";
+  }
+
+  @NotNull
+  @NonNls
+  public String getShortName() {
+    return "Struts2ModelInspection";
   }
 
   /**
@@ -74,7 +92,7 @@ public class Struts2ModelInspection extends BasicDomElementsInspection<StrutsRoo
   }
 
   protected boolean shouldCheckResolveProblems(final GenericDomValue value) {
-    // we roll our own checking for <action> class in checkDomElement()
+    // we roll our own checking for <action> class in S2DomModelVisitor#visitAction()
     if (value.getConverter() instanceof ActionClassConverter) {
       return false;
     }
@@ -89,45 +107,60 @@ public class Struts2ModelInspection extends BasicDomElementsInspection<StrutsRoo
                                  final DomHighlightingHelper helper) {
     super.checkDomElement(element, holder, helper);
 
-    if (element instanceof GenericAttributeValue) {
-      final GenericAttributeValue genericDomValue = (GenericAttributeValue) element;
-      if (genericDomValue.getConverter() instanceof ActionClassConverter) {
-        final XmlElement xmlElement = DomUtil.getValueElement(genericDomValue);
-        if (xmlElement == null) return;
+    final Struts2DomModelVisitor visitor = new Struts2DomModelVisitor(holder);
+    element.accept(visitor);
+  }
 
-        final PsiReference[] psiReferences = xmlElement.getReferences();
 
-        for (final PsiReference psiReference : psiReferences) {
-          final PsiElement resolveElement = psiReference.resolve();
-          if (resolveElement != null &&
-              resolveElement instanceof PsiClass) {
-            return;
-          }
+  /**
+   * Provides extended highlighting for various elements.
+   */
+  private static class Struts2DomModelVisitor implements DomElementVisitor {
+
+    private final DomElementAnnotationHolder holder;
+
+    Struts2DomModelVisitor(final DomElementAnnotationHolder holder) {
+      this.holder = holder;
+    }
+
+    public void visitDomElement(final DomElement element) {
+    }
+
+    public void visitAction(final Action action) {
+      final GenericAttributeValue actionClass = action.getActionClass();
+
+      assert actionClass.getConverter() instanceof ActionClassConverter;
+
+      final XmlElement xmlElement = DomUtil.getValueElement(actionClass);
+      if (xmlElement == null) {
+        return;
+      }
+
+      final PsiReference[] psiReferences = xmlElement.getReferences();
+
+      for (final PsiReference psiReference : psiReferences) {
+        final PsiElement resolveElement = psiReference.resolve();
+        if (resolveElement != null &&
+            resolveElement instanceof PsiClass) {
+          return;
         }
+      }
 
-        final String referenceTypes = StringUtil.join(genericDomValue.getUserData(ActionClassConverter.REFERENCES_TYPES),
-                                                      "|");
-        holder.createProblem(genericDomValue,
-                             HighlightSeverity.ERROR,
-                             "Cannot resolve " + referenceTypes + " '" + genericDomValue.getStringValue() + "'");
+      final String referenceTypes = StringUtil.join(actionClass.getUserData(ActionClassConverter.REFERENCES_TYPES),
+                                                    "|");
+      holder.createProblem(actionClass,
+                           HighlightSeverity.ERROR,
+                           "Cannot resolve " + referenceTypes + " '" + actionClass.getStringValue() + "'");
+    }
+
+    public void visitStrutsPackage(final StrutsPackage strutsPackage) {
+      final String namespace = strutsPackage.getNamespace().getStringValue();
+      if (namespace != null && !namespace.startsWith("/")) {
+        holder.createProblem(strutsPackage.getNamespace(),
+                             "Namespace must start with '/'");
       }
     }
-  }
 
-  @NotNull
-  public String getGroupDisplayName() {
-    return "Struts 2";
   }
-
-  @NotNull
-  public String getDisplayName() {
-    return "Struts 2 Model Inspection";
-  }
-
-  @NotNull
-  @NonNls
-  public String getShortName() {
-    return "Struts2ModelInspection";
-  }
-
+  
 }
