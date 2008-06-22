@@ -51,7 +51,8 @@
   <package name="<error> </error>"/>
   <package name="<error>DUPLICATED_NAME</error>"/>
   <package name="<error>DUPLICATED_NAME</error>"/>
-
+  <package name="doesNotStartWithSlash" namespace="<error descr="Namespace must start with '/'">INVALID_VALUE</error>"/>
+  
   <!-- "namespace" -->
   <package name="emptyName" namespace=<error>""</error>/>
   <package name="emptyName2" namespace="<error> </error>"/>
