@@ -39,6 +39,10 @@ public class StrutsHighlightingTestCase extends BasicStrutsHighlightingTestCase<
     System.out.println("struts-simple.xml = " + duration);
   }
 
+  public void testConstants() throws Throwable {
+    performHighlightingTest("struts-constants.xml");
+  }
+
   public void testParam() throws Throwable {
     performHighlightingTest("struts-param.xml");
   }

@@ -19,17 +19,18 @@ import com.intellij.util.xml.*;
 
 /**
  * <code>constant</code>
-
+ *
  * @author Yann C&eacute;bron
  */
 public interface Constant extends DomElement {
 
   @NameValue
   @Required
-  @Convert(value = ConstantNameConverter.class)
+  @Convert(ConstantNameConverter.class)
   GenericAttributeValue<String> getName();
 
   @Required(nonEmpty = false)
+  @Convert(ConstantValueConverter.class)
   GenericAttributeValue<String> getValue();
 
 }
