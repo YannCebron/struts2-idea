@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * <code>struts.xml</code> DOM-Model files.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class Struts2DomFileDescription extends DomFileDescription<StrutsRoot> {
 

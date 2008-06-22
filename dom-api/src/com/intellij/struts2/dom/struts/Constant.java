@@ -20,7 +20,7 @@ import com.intellij.util.xml.*;
 /**
  * <code>constant</code>
 
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public interface Constant extends DomElement {
 

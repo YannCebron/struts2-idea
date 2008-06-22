@@ -24,7 +24,7 @@ import com.intellij.util.xml.*;
 /**
  * Global <code>result</code>.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 @Convert(StrutsPathReferenceConverter.class)
 public interface GlobalResult extends ParamsElement, GenericDomValue<PathReference> {

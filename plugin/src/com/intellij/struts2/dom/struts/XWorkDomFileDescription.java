@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * <code>xwork.xml</code> DOM-Model files.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class XWorkDomFileDescription extends DomFileDescription<StrutsRoot> {
 

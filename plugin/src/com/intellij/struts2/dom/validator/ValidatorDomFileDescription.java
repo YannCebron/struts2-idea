@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * <code>validation.xml</code> DOM-Model files.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ValidatorDomFileDescription extends DomFileDescription<Validators> {
 

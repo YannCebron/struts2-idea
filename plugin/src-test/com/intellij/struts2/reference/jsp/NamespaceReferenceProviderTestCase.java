@@ -23,7 +23,7 @@ import com.intellij.testFramework.builders.WebModuleFixtureBuilder;
 /**
  * Tests for {@link NamespaceReferenceProvider}.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class NamespaceReferenceProviderTestCase extends BasicHighlightingTestCase<WebModuleFixtureBuilder> {
 

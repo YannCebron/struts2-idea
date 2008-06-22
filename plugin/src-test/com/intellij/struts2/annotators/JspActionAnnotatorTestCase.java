@@ -28,7 +28,7 @@ import java.util.Set;
 /**
  * Test for {@link JspActionAnnotator}
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class JspActionAnnotatorTestCase extends BasicStrutsHighlightingTestCase<WebModuleFixtureBuilder> {
 

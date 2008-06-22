@@ -39,7 +39,7 @@ import java.util.List;
  * Annotator for Action-classes.
  * Provides gutter icon navigation to &lt;action&gt; declaration(s).
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ActionAnnotator implements Annotator {
 

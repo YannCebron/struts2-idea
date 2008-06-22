@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * <code>struts</code> root-element for struts.xml-files.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 @Namespace(StrutsDomConstants.STRUTS_NAMESPACE_KEY)
 public interface StrutsRoot extends DomElement {

@@ -5,7 +5,7 @@ import com.intellij.struts2.BasicHighlightingTestCase;
 import com.intellij.testFramework.builders.WebModuleFixtureBuilder;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class UITagsAttributesReferenceProviderTest extends BasicHighlightingTestCase<WebModuleFixtureBuilder> {
 

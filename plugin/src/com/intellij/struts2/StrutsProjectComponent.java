@@ -42,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
  * <li>DOM-Converter implementations</li>
  * </ul>
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsProjectComponent extends AbstractProjectComponent {
 

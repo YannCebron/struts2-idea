@@ -23,7 +23,7 @@ import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 /**
  * Base class for struts.xml highlighting tests.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public abstract class BasicStrutsHighlightingTestCase<T extends JavaModuleFixtureBuilder> extends BasicHighlightingTestCase<T> {
 

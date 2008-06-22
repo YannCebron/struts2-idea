@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 class StrutsModelImpl extends DomModelImpl<StrutsRoot> implements StrutsModel {
 

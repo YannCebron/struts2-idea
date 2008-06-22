@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NonNls;
 /**
  * Filters for use in {@link com.intellij.psi.impl.source.resolve.reference.PsiReferenceProvider}s.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public final class ReferenceFilters {
 

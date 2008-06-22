@@ -25,7 +25,7 @@ import com.intellij.util.xml.SubTagList;
 import java.util.List;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public interface DefaultInterceptorRef extends ParamsElement {
 

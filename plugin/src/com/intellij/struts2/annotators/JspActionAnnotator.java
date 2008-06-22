@@ -47,7 +47,7 @@ import java.util.Set;
 /**
  * Annotates custom tags with "action" attribute.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class JspActionAnnotator implements Annotator {
 

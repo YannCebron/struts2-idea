@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Converter for &lt;action&gt; "class" attribute.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public abstract class ActionClassConverter extends Converter<PsiClass> implements CustomReferenceConverter<PsiClass> {
 
@@ -47,7 +47,7 @@ public abstract class ActionClassConverter extends Converter<PsiClass> implement
   /**
    * Contributes results to {@link ActionClassConverter}.
    *
-   * @author Yann CŽbron
+   * @author Yann C&eacute;bron
    */
   public static interface ActionClassConverterContributor extends PsiReferenceProvider {
 

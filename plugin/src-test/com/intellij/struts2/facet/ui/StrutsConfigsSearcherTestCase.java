@@ -43,7 +43,7 @@ import java.util.Map;
 /**
  * Tests for {@link com.intellij.struts2.facet.ui.StrutsConfigsSearcher}.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsConfigsSearcherTestCase extends BasicHighlightingTestCase<JavaModuleFixtureBuilder> {
 

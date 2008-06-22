@@ -18,7 +18,7 @@ package com.intellij.struts2.dom.struts;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsCompletionTestCase extends BasicStrutsHighlightingTestCase<JavaModuleFixtureBuilder> {
 

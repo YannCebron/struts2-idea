@@ -15,10 +15,10 @@
 
 package com.intellij.struts2.dom.validator;
 
-import com.intellij.util.xml.DomElement;
-import com.intellij.util.xml.SubTagList;
-import com.intellij.util.xml.Namespace;
 import com.intellij.struts2.dom.StrutsDomConstants;
+import com.intellij.util.xml.DomElement;
+import com.intellij.util.xml.Namespace;
+import com.intellij.util.xml.SubTagList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * <code>validators</code>
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 @Namespace(StrutsDomConstants.VALIDATOR_NAMESPACE_KEY)
 public interface Validators extends DomElement {

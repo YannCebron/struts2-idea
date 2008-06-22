@@ -26,7 +26,7 @@
   <depends optional="true" config-file="struts2-javascript.xml">JavaScript</depends>
   <depends optional="true" config-file="struts2-spring.xml">com.intellij.spring</depends>
 
-  <vendor email="yann.cebron@googlemail.com">Yann Cébron</vendor>
+  <vendor email="yann.cebron@googlemail.com">Yann C&eacute;bron</vendor>
 
   <idea-version since-build="7757" until-build="7999"/>
 

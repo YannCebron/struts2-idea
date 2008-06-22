@@ -41,7 +41,7 @@ import java.util.List;
 /**
  * Extends &lt;action&gt; "class" resolving to Spring beans.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ActionClassConverterSpringContributor extends PsiReferenceProviderBase implements ActionClassConverter.ActionClassConverterContributor {
 
