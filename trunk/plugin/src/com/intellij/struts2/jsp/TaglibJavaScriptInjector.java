@@ -43,7 +43,7 @@ import java.util.List;
  * TODO add specific tag-attributes:
  * http://struts.apache.org/2.0.11/docs/optiontransferselect.html + more
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 @SuppressWarnings({"ComponentNotRegistered"})
 public class TaglibJavaScriptInjector extends AbstractProjectComponent implements MultiHostInjector {

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Custom tags attribute "namespace".
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class NamespaceReferenceProvider extends PsiReferenceProviderBase {
 

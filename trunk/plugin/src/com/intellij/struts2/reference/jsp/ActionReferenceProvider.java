@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Custom tags attribute "action".
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ActionReferenceProvider extends PsiReferenceProviderBase {
 

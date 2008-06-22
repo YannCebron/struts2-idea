@@ -23,7 +23,7 @@ import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 /**
  * Tests for {@link StrutsVersionDetector}.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsVersionDetectorTestCase extends BasicHighlightingTestCase<JavaModuleFixtureBuilder> {
 

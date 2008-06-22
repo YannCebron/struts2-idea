@@ -36,7 +36,7 @@ import java.awt.event.ActionListener;
 /**
  * Struts2 facet tab "Features".
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class FeaturesConfigurationTab extends FacetEditorTab {
 

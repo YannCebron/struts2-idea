@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Registers all {@link com.intellij.psi.impl.source.resolve.reference.PsiReferenceProvider}s.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsReferenceProviderComponent extends AbstractProjectComponent {
 

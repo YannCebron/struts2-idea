@@ -20,7 +20,7 @@ import com.intellij.util.xml.NamedEnum;
 /**
  * <code>bean</code> "scope" possible values.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public enum BeanScope implements NamedEnum {
 

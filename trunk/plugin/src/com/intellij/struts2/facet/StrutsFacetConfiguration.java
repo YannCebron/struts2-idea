@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * Provides the configuration tabs and reads/stores settings.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsFacetConfiguration implements FacetConfiguration, ModificationTracker {
 

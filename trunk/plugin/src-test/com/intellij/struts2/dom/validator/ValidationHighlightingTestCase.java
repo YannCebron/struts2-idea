@@ -20,7 +20,7 @@ import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 /**
  * Various basic and complex validation.xml highlighting tests.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ValidationHighlightingTestCase extends BasicValidationHighlightingTestCase<JavaModuleFixtureBuilder> {
 

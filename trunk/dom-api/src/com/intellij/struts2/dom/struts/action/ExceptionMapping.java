@@ -20,7 +20,7 @@ import com.intellij.struts2.dom.ParamsElement;
 import com.intellij.util.xml.*;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public interface ExceptionMapping extends ParamsElement {
 

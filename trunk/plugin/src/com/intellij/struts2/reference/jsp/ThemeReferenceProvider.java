@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  * <p/>
  * TODO: real resolving to available themes
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ThemeReferenceProvider extends PsiReferenceProviderBase {
 

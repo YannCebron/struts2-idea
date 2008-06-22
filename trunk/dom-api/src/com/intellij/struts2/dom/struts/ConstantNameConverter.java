@@ -28,7 +28,7 @@ import java.util.List;
  * <p/>
  * See <code>struts.properties</code> in struts.jar.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ConstantNameConverter extends ResolvingConverter.StringConverter {
 

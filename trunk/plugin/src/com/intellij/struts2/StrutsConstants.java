@@ -18,7 +18,7 @@ package com.intellij.struts2;
 import org.jetbrains.annotations.NonNls;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public final class StrutsConstants {
 

@@ -18,7 +18,7 @@ package com.intellij.struts2.facet.configuration;
 /**
  * Container for persisting {@link com.intellij.struts2.facet.ui.ValidationConfigurationTab} options.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsValidationConfiguration {
 

@@ -19,7 +19,7 @@ import com.intellij.testFramework.UsefulTestCase;
 import org.jetbrains.annotations.NonNls;
 
 /**
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public abstract class BasicStrutsTestCase extends UsefulTestCase {
 

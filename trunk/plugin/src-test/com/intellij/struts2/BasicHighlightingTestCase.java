@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * Base class for highlighting tests.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public abstract class BasicHighlightingTestCase<T extends JavaModuleFixtureBuilder> extends BasicStrutsTestCase {
 

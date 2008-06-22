@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Default DOM-Model inspection for validator.xml files.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ValidatorModelInspection extends BasicDomElementsInspection<Validators> {
 

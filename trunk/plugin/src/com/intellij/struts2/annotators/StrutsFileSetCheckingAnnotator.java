@@ -49,7 +49,7 @@ import java.util.Set;
 /**
  * Checks if <code>struts.xml</code> is registered in any of the file sets in the current module.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class StrutsFileSetCheckingAnnotator implements Annotator {
 

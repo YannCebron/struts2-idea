@@ -38,7 +38,7 @@ import java.util.Set;
 
 /**
  * @author Gregory.Shrago
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class IncludeFileResolvingConverterImpl extends IncludeFileResolvingConverter {
 

@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * <code>validators</code> in validator-config.xml.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 @Namespace(StrutsDomConstants.VALIDATOR_CONFIG_NAMESPACE_KEY)
 public interface ValidatorsConfig extends DomElement {

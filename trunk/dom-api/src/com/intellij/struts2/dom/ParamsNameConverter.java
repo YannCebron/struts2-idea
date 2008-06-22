@@ -43,7 +43,7 @@ import java.util.Set;
 /**
  * Resolves to all writable properties.
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class ParamsNameConverter extends ResolvingConverter<PsiMethod> {
 

@@ -39,7 +39,7 @@ import java.util.List;
 /**
  * Provides paths to "/XYZ.action".
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 class ActionPathResultContributor implements StrutsResultContributor {
 

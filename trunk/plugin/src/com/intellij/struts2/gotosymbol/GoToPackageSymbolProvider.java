@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * Go to {@link StrutsPackage} by name (CTRL+ALT+SHIFT+N).
  *
- * @author Yann CŽbron
+ * @author Yann C&eacute;bron
  */
 public class GoToPackageSymbolProvider extends GoToSymbolProvider {
 
