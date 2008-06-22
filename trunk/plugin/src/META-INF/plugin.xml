@@ -8,6 +8,9 @@
   <description>
     <![CDATA[
   Provides full integration of <a href="http://struts.apache.org/2.x/index.html">Apache Struts 2</a>.
+  <br><br>
+  See <a href="http://www.jetbrains.net/confluence/display/CONTEST/Struts2PluginFeaturesUserGuide">here</a>
+  for feature description and usage guides.
   ]]>
   </description>
 
@@ -17,7 +20,7 @@
   ]]>
   </change-notes>
 
-  <version>0.40</version>
+  <version>0.41</version>
 
   <!-- required dependencies -->
   <depends>com.intellij.javaee</depends>
@@ -26,7 +29,7 @@
   <depends optional="true" config-file="struts2-javascript.xml">JavaScript</depends>
   <depends optional="true" config-file="struts2-spring.xml">com.intellij.spring</depends>
 
-  <vendor email="yann.cebron@googlemail.com">Yann C&eacute;bron</vendor>
+  <vendor email="yann.cebron@googlemail.com">Yann Cébron</vendor>
 
   <idea-version since-build="7757" until-build="7999"/>
 
